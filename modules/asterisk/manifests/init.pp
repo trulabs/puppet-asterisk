@@ -60,14 +60,6 @@
 #   Boolean. Whether Puppet should manage the configuration files.
 #   Default: true
 # 
-# [*with_websocket*]
-#   Boolean. Whether WebSockets should be enabled.
-#   Default: false
-# 
-# [*with_ephem_auth*]
-#   Boolean. Whether the ephemeral authentication module should be installed.
-#   Default: false
-# 
 class asterisk(
   $service_enable = $asterisk::params::service_enable,
   $service_ensure = $asterisk::params::service_ensure,
@@ -75,12 +67,13 @@ class asterisk(
   $manage_repo    = $asterisk::params::manage_repo,
   $package_ensure = $asterisk::params::package_ensure,
   $package_name   = $asterisk::params::package_name,
+  $with_tls       = $asterisk::params::with_tls,
   $manage_config  = $asterisk::params::manage_config,
 ) inherits asterisk::params {
 
   validate_string($package_ensure, $package_name)
   validate_bool($service_enable, $service_manage, $manage_repo, $manage_config)
-  validate_bool($with_tls, $with_websockets, $with_ephem_auth)
+  validate_bool($with_tls)
 
   class { '::asterisk::install':
     package_ensure  => $package_ensure,
@@ -88,7 +81,6 @@ class asterisk(
   } ->
   class { '::asterisk::config':
     with_tls        => $with_tls,
-    with_websockets => $with_websockets,
     manage_config   => $manage_config,
   }  ->
   class { '::asterisk::service':
