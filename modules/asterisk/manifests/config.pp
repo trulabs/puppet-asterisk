@@ -18,14 +18,23 @@ class asterisk::config (
   File {
     owner => 'root',
     group => 'root',
-    mode  => '0644',
+    mode  => '0640',
   }
 
   if ($manage_config) {
     file { '/etc/default/asterisk':
       ensure  => file,
+      mode    => '0644',
       path    => '/etc/default/asterisk',
       content => template('asterisk/etc_default_asterisk'),
+    }
+
+    file { '/etc/asterisk/asterisk.conf':
+      ensure  => file,
+      owner   => 'asterisk',
+      group   => 'asterisk',
+      path    => '/etc/asterisk/asterisk.conf',
+      content => template('asterisk/asterisk.conf'),
     }
 
     # TODO /etc/init.d/asterisk
