@@ -18,4 +18,5 @@ class asterisk::params {
   $package_ensure = 'latest'
   $package_name   = 'asterisk'
   $manage_config  = true
+  $ast_dumpcore   = 'no'
 }

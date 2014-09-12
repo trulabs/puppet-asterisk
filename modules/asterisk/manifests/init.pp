@@ -52,6 +52,10 @@
 #   Boolean. Whether Puppet should manage the configuration files.
 #   Default: true
 # 
+# [*ast_dumpcore*]
+#   String. Whether Asterisk should create core dumps ('no' is false, anything else is true)
+#   Default: no
+# 
 class asterisk(
   $service_enable = $asterisk::params::service_enable,
   $service_ensure = $asterisk::params::service_ensure,
@@ -59,6 +63,7 @@ class asterisk(
   $package_ensure = $asterisk::params::package_ensure,
   $package_name   = $asterisk::params::package_name,
   $manage_config  = $asterisk::params::manage_config,
+  $ast_dumpcore   = $asterisk::params::ast_dumpcore,
 ) inherits asterisk::params {
 
   validate_string($package_ensure, $package_name)
@@ -69,7 +74,8 @@ class asterisk(
     package_name    => $package_name,
   } ->
   class { '::asterisk::config':
-    manage_config   => $manage_config,
+    manage_config => $manage_config,
+    ast_dumpcore  => $ast_dumpcore,
   }  ->
   class { '::asterisk::service':
     service_ensure => $service_ensure,
