@@ -21,4 +21,5 @@ class asterisk::params {
   $ast_dumpcore   = 'no'
   $rtpstart       = '10000'
   $rtpend         = '20000'
+  $udpbindaddress = '0.0.0.0'
 }

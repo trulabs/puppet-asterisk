@@ -64,6 +64,10 @@
 #   String. Upper limit for RTP port range
 #   Default: 20000
 # 
+# [*udpbindaddress*]
+#   String. Interface to bind UDP
+#   Default: 0.0.0.0
+# 
 class asterisk(
   $service_enable = $asterisk::params::service_enable,
   $service_ensure = $asterisk::params::service_ensure,
@@ -74,6 +78,7 @@ class asterisk(
   $ast_dumpcore   = $asterisk::params::ast_dumpcore,
   $rtpstart       = $asterisk::params::rtpstart,
   $rtpend         = $asterisk::params::rtpend,
+  $udpbindaddress = $asterisk::params::udpbindaddress,
 ) inherits asterisk::params {
 
   validate_string($package_ensure, $package_name)
@@ -84,10 +89,11 @@ class asterisk(
     package_name    => $package_name,
   } ->
   class { '::asterisk::config':
-    manage_config => $manage_config,
-    ast_dumpcore  => $ast_dumpcore,
-    rtpstart      => $rtpstart,
-    rtpend        => $rtpend,
+    manage_config  => $manage_config,
+    ast_dumpcore   => $ast_dumpcore,
+    rtpstart       => $rtpstart,
+    rtpend         => $rtpend,
+    udpbindaddress => $udpbindaddress,
   }  ->
   class { '::asterisk::service':
     service_ensure => $service_ensure,

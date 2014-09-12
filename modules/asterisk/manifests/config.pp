@@ -15,7 +15,8 @@ class asterisk::config (
   $manage_config,
   $ast_dumpcore,
   $rtpstart,
-  $rtpend
+  $rtpend,
+  $udpbindaddress
 ) inherits asterisk {
   File {
     owner => 'root',
@@ -28,7 +29,7 @@ class asterisk::config (
       ensure  => file,
       mode    => '0644',
       path    => '/etc/default/asterisk',
-      content => template('asterisk/etc_default_asterisk'),
+      content => template('asterisk/etc_default_asterisk.erb'),
     }
 
     file { '/etc/asterisk/asterisk.conf':
@@ -36,7 +37,7 @@ class asterisk::config (
       owner   => 'asterisk',
       group   => 'asterisk',
       path    => '/etc/asterisk/asterisk.conf',
-      content => template('asterisk/asterisk.conf'),
+      content => template('asterisk/asterisk.conf.erb'),
     }
 
     file { '/etc/asterisk/rtp.conf':
@@ -44,7 +45,15 @@ class asterisk::config (
       owner   => 'asterisk',
       group   => 'asterisk',
       path    => '/etc/asterisk/rtp.conf',
-      content => template('asterisk/rtp.conf'),
+      content => template('asterisk/rtp.conf.erb'),
+    }
+
+    file { '/etc/asterisk/sip.conf':
+      ensure  => file,
+      owner   => 'asterisk',
+      group   => 'asterisk',
+      path    => '/etc/asterisk/sip.conf',
+      content => template('asterisk/sip.conf.erb'),
     }
 
     # TODO /etc/init.d/asterisk
