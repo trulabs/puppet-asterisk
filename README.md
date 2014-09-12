@@ -23,11 +23,17 @@ This module helps you installing and configuring Asterisk with Puppet.
 Setup
 -----
 
-Add:
+To install Asterisk with the default parameters:
 
-    include 'asterisk'
+    class { 'asterisk': }
 
-in your manifest.
+(this will also install the default package version for the current distribution).
+
+If you want a specific package version (must be available depending on apt sources configuration):
+
+    class { 'asterisk':
+        package_ensure => '<MY VERSION>',
+    }
 
 Author
 ------
