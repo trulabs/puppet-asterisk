@@ -52,10 +52,6 @@
 #   String. What package name to use for asterisk.
 #   Default: asterisk
 #
-# [*with_tls*]
-#   Boolean. Whether TLS should be enabled.
-#   Default: false
-# 
 # [*manage_config*]
 #   Boolean. Whether Puppet should manage the configuration files.
 #   Default: true
@@ -67,20 +63,17 @@ class asterisk(
   $manage_repo    = $asterisk::params::manage_repo,
   $package_ensure = $asterisk::params::package_ensure,
   $package_name   = $asterisk::params::package_name,
-  $with_tls       = $asterisk::params::with_tls,
   $manage_config  = $asterisk::params::manage_config,
 ) inherits asterisk::params {
 
   validate_string($package_ensure, $package_name)
   validate_bool($service_enable, $service_manage, $manage_repo, $manage_config)
-  validate_bool($with_tls)
 
   class { '::asterisk::install':
     package_ensure  => $package_ensure,
     package_name    => $package_name,
   } ->
   class { '::asterisk::config':
-    with_tls        => $with_tls,
     manage_config   => $manage_config,
   }  ->
   class { '::asterisk::service':
