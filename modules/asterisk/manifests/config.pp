@@ -18,6 +18,7 @@ class asterisk::config (
   File {
     owner => 'root',
     group => 'root',
+    mode  => '0644',
   }
 
   if ($manage_config) {
@@ -27,6 +28,7 @@ class asterisk::config (
       content => template('asterisk/etc_default_asterisk'),
     }
 
-    # TODO
+    # TODO /etc/init.d/asterisk
+    # TODO /etc/logrotate.d/asterisk
   }
 }
