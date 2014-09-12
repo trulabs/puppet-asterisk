@@ -19,4 +19,6 @@ class asterisk::params {
   $package_name   = 'asterisk'
   $manage_config  = true
   $ast_dumpcore   = 'no'
+  $rtpstart       = '10000'
+  $rtpend         = '20000'
 }

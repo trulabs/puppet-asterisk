@@ -13,7 +13,9 @@
 
 class asterisk::config (
   $manage_config,
-  $ast_dumpcore
+  $ast_dumpcore,
+  $rtpstart,
+  $rtpend
 ) inherits asterisk {
   File {
     owner => 'root',
@@ -35,6 +37,14 @@ class asterisk::config (
       group   => 'asterisk',
       path    => '/etc/asterisk/asterisk.conf',
       content => template('asterisk/asterisk.conf'),
+    }
+
+    file { '/etc/asterisk/rtp.conf':
+      ensure  => file,
+      owner   => 'asterisk',
+      group   => 'asterisk',
+      path    => '/etc/asterisk/rtp.conf',
+      content => template('asterisk/rtp.conf'),
     }
 
     # TODO /etc/init.d/asterisk

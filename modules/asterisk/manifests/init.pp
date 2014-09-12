@@ -56,6 +56,14 @@
 #   String. Whether Asterisk should create core dumps ('no' is false, anything else is true)
 #   Default: no
 # 
+# [*rtpstart*]
+#   String. Lower limit for RTP port range
+#   Default: 10000
+# 
+# [*rtpend*]
+#   String. Upper limit for RTP port range
+#   Default: 20000
+# 
 class asterisk(
   $service_enable = $asterisk::params::service_enable,
   $service_ensure = $asterisk::params::service_ensure,
@@ -64,6 +72,8 @@ class asterisk(
   $package_name   = $asterisk::params::package_name,
   $manage_config  = $asterisk::params::manage_config,
   $ast_dumpcore   = $asterisk::params::ast_dumpcore,
+  $rtpstart       = $asterisk::params::rtpstart,
+  $rtpend         = $asterisk::params::rtpend,
 ) inherits asterisk::params {
 
   validate_string($package_ensure, $package_name)
@@ -76,6 +86,8 @@ class asterisk(
   class { '::asterisk::config':
     manage_config => $manage_config,
     ast_dumpcore  => $ast_dumpcore,
+    rtpstart      => $rtpstart,
+    rtpend        => $rtpend,
   }  ->
   class { '::asterisk::service':
     service_ensure => $service_ensure,
