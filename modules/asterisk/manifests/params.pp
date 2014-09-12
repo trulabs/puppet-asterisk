@@ -15,12 +15,7 @@ class asterisk::params {
   $service_enable = false
   $service_ensure = 'running'
   $service_manage = false
-
-  $manage_repo    = false
   $package_ensure = 'latest'
   $package_name   = 'asterisk'
-
-  $with_tls       = false
-
   $manage_config  = true
 }

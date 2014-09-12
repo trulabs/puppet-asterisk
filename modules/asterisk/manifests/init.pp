@@ -39,10 +39,6 @@
 #   Boolean. Whether Puppet should manage this service.
 #   Default: false
 # 
-# [*manage_repo*]
-#   Boolean. Whether Puppet should manage the package repo.
-#   Default: false
-# 
 # [*package_ensure*]
 #   String. Ensure the package is present or not.
 #   Options: present, latest, absent
@@ -60,14 +56,13 @@ class asterisk(
   $service_enable = $asterisk::params::service_enable,
   $service_ensure = $asterisk::params::service_ensure,
   $service_manage = $asterisk::params::service_manage,
-  $manage_repo    = $asterisk::params::manage_repo,
   $package_ensure = $asterisk::params::package_ensure,
   $package_name   = $asterisk::params::package_name,
   $manage_config  = $asterisk::params::manage_config,
 ) inherits asterisk::params {
 
   validate_string($package_ensure, $package_name)
-  validate_bool($service_enable, $service_manage, $manage_repo, $manage_config)
+  validate_bool($service_enable, $service_manage, $manage_config)
 
   class { '::asterisk::install':
     package_ensure  => $package_ensure,
@@ -80,9 +75,5 @@ class asterisk(
     service_ensure => $service_ensure,
     service_manage => $service_manage,
     service_enable => $service_enable,
-  }
-
-  if ($manage_repo) {
-    class { '::asterisk::repo': }
   }
 }
