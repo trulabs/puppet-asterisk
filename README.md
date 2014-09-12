@@ -16,7 +16,9 @@ The asterisk module provides a simple interface for managing Asterisk deployment
 Module Description
 ------------------
 
-TODO: Something about Asterisk HERE TODO TODO TODO
+Asterisk is a free and open source framework for building communications applications
+[http://www.asterisk.org/](http://www.asterisk.org/)
+This module helps you installing and configuring Asterisk with Puppet.
 
 Setup
 -----
@@ -25,21 +27,7 @@ Add:
 
     include 'asterisk'
 
-in your node definition.
-
-Run
----
-    sudo puppet apply -v environments/ENVIRONMENT/manifests/site.pp --modulepath modules/:/etc/puppet/modules/ --show_diff --noop
-
-Install a 3rd party module
---------------------------
-
-    sudo puppet module install
-
-Run puppet-lint
----------------
-
-    puppet-lint --no-80chars-check --with-filename modules/asterisk/manifests/
+in your manifest.
 
 Author
 ------
