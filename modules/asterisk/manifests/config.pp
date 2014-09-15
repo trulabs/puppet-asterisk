@@ -56,9 +56,16 @@ class asterisk::config (
       group   => 'asterisk',
       path    => '/etc/asterisk/sip.conf',
       content => template('asterisk/sip.conf.erb'),
+      notify  => Exec['asterisk-sip-reload'],
     }
 
     # TODO /etc/init.d/asterisk
     # TODO /etc/logrotate.d/asterisk
+  }
+
+  # Ask Asterisk to reload the SIP configuration
+  exec { 'asterisk-sip-reload':
+    command     => "/usr/sbin/asterisk -rx 'sip reload'",
+    refreshonly => true,
   }
 }
