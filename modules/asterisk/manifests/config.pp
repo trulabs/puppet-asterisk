@@ -16,7 +16,9 @@ class asterisk::config (
   $ast_dumpcore,
   $rtpstart,
   $rtpend,
-  $udpbindaddress
+  $udpbindaddr,
+  $tcpenable,
+  $tcpbindaddr
 ) inherits asterisk {
   File {
     owner => 'root',

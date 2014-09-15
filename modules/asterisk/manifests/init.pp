@@ -64,8 +64,16 @@
 #   String. Upper limit for RTP port range
 #   Default: 20000
 # 
-# [*udpbindaddress*]
+# [*udpbindaddr*]
 #   String. Interface to bind UDP
+#   Default: 0.0.0.0
+# 
+# [*tcpenable*]
+#   String. Whether to enable TCP ('no' to disable)
+#   Default: no
+# 
+# [*tcpbindaddr*]
+#   String. Interface to bind TCP
 #   Default: 0.0.0.0
 # 
 class asterisk(
@@ -78,22 +86,27 @@ class asterisk(
   $ast_dumpcore   = $asterisk::params::ast_dumpcore,
   $rtpstart       = $asterisk::params::rtpstart,
   $rtpend         = $asterisk::params::rtpend,
-  $udpbindaddress = $asterisk::params::udpbindaddress,
+  $udpbindaddr    = $asterisk::params::udpbindaddr,
+  $tcpenable      = $asterisk::params::tcpenable,
+  $tcpbindaddr    = $asterisk::params::tcpbindaddr,
 ) inherits asterisk::params {
 
   validate_string($package_ensure, $package_name)
   validate_bool($service_enable, $service_manage, $manage_config)
+  validate_string($udpbindaddr, $tcpenable, $tcpbindaddr)
 
   class { '::asterisk::install':
     package_ensure  => $package_ensure,
     package_name    => $package_name,
   } ->
   class { '::asterisk::config':
-    manage_config  => $manage_config,
-    ast_dumpcore   => $ast_dumpcore,
-    rtpstart       => $rtpstart,
-    rtpend         => $rtpend,
-    udpbindaddress => $udpbindaddress,
+    manage_config => $manage_config,
+    ast_dumpcore  => $ast_dumpcore,
+    rtpstart      => $rtpstart,
+    rtpend        => $rtpend,
+    udpbindaddr   => $udpbindaddr,
+    tcpenable     => $tcpenable,
+    tcpbindaddr   => $tcpbindaddr,
   }  ->
   class { '::asterisk::service':
     service_ensure => $service_ensure,
