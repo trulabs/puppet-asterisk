@@ -32,6 +32,7 @@ class asterisk::config (
       mode    => '0644',
       path    => '/etc/default/asterisk',
       content => template('asterisk/etc_default_asterisk.erb'),
+      notify  => Service['asterisk'], # restart asterisk when this changes
     }
 
     file { '/etc/asterisk/asterisk.conf':
@@ -40,6 +41,7 @@ class asterisk::config (
       group   => 'asterisk',
       path    => '/etc/asterisk/asterisk.conf',
       content => template('asterisk/asterisk.conf.erb'),
+      notify  => Service['asterisk'], # restart asterisk when asterisk.conf changes
     }
 
     file { '/etc/asterisk/rtp.conf':
@@ -48,6 +50,7 @@ class asterisk::config (
       group   => 'asterisk',
       path    => '/etc/asterisk/rtp.conf',
       content => template('asterisk/rtp.conf.erb'),
+      notify  => Service['asterisk'], # restart asterisk when rtp.conf changes
     }
 
     file { '/etc/asterisk/sip.conf':
