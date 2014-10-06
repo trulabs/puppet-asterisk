@@ -25,13 +25,13 @@ Setup
 
 To install Asterisk with the default parameters:
 
-    class { 'asterisk': }
+    class { '::asterisk': }
 
 (this will also install the default package version for the current distribution).
 
 If you want a specific package version (must be available depending on apt sources configuration):
 
-    class { 'asterisk':
+    class { '::asterisk':
         package_ensure => '<MY VERSION>',
     }
 
