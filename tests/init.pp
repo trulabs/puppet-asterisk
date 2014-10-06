@@ -1,6 +1,4 @@
-#nodes.pp
-
-node 'base_asterisk' {
+node 'default' {
 
   class { '::asterisk':
     service_manage => true,
@@ -10,5 +8,3 @@ node 'base_asterisk' {
   }
 }
 
-node 'debian7' inherits 'base_asterisk' {
-}
