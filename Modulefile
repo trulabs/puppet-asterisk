@@ -8,4 +8,4 @@ description  'Asterisk Module for Debian.'
 project_page 'http://github.com/trulabs/puppet-asterisk'
 
 ## Add dependencies, if any:
-dependency 'puppetlabs/apt'
+dependency 'puppetlabs/stdlib'
