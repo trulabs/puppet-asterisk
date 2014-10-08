@@ -35,6 +35,18 @@ If you want a specific package version (must be available depending on apt sourc
         package_ensure => '<MY VERSION>',
     }
 
+**On an empty host:**
+
+    apt-get update && apt-get install -y puppet
+    ## This will also pull puppetlabs-stdlib
+    puppet module install trulabs-asterisk
+    puppet apply -v /etc/puppet/modules/asterisk/tests/init.pp --show_diff --noop
+
+Parameters
+----------
+
+TODO
+
 Author
 ------
 
