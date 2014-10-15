@@ -45,7 +45,83 @@ If you want a specific package version (must be available depending on apt sourc
 Parameters
 ----------
 
-TODO
+
+#####`service_enable`
+
+Enable Asterisk.
+
+#####`service_ensure`
+
+Ensure the service is running or stopped.
+
+#####`service_manage`
+
+Whether Puppet should manage Asterisk as a service.
+
+#####`package_ensure`
+
+What the asterisk package version should be (including present, latest, absent).
+
+#####`package_name`
+
+Name of the asterisk package.
+
+#####`manage_config`
+
+Take care of configuration files, or delegate to something else external.
+
+#####`ast_dump_core`
+
+Create core dumps ('no' is false, everything else true).
+
+#####`rtpstart`
+
+Lower limit for RTP port range.
+
+#####`rtpend`
+
+Upper limit for RTP port range.
+
+#####`udpbindaddr`
+
+Interface (with optional port) where to bind UDP.
+
+#####`tcpenable`
+
+Enable TCP ('yes' or 'no').
+
+#####`tcpbindaddr`
+
+Interface (with optional port) where to bind TCP.
+
+#####`tlsenable`
+
+Enable TLS ('yes' or 'no').
+
+#####`tlsbindaddr`
+
+Interface (with optional port) where to bind TLS.
+
+#####`tlscertfile`
+
+Path for TLS certificate.
+
+#####`tlsprivatekey`
+
+Path for TLS private key file.
+
+#####`tlscafile`
+
+Path for TLS CA file..
+
+#####`tlscapath`
+
+Path for TLS CA files folder.
+
+#####`tlsdontverifyserver`
+
+As TLS client, verify or not the server certificate ('yes' or 'no').
+
 
 Author
 ------
