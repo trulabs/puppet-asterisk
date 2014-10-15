@@ -24,4 +24,11 @@ class asterisk::params {
   $udpbindaddr    = '0.0.0.0'
   $tcpenable      = 'no'
   $tcpbindaddr    = '0.0.0.0'
+  $tlsenable      = 'no'
+  $tlsbindaddr    = '0.0.0.0'
+  $tlscertfile    = 'asterisk.pem'
+  $tlsprivatekey  = 'asterisk.pem'
+  $tlscafile      = ''
+  $tlscapath      = ''
+  $tlsdontverifyserver = 'no'
 }

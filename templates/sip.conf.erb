@@ -201,17 +201,17 @@ udpbindaddr=<%= udpbindaddr %>             ; IP address to bind UDP listen socke
 ; subject to change in any release.  If they are changed, the changes will
 ; be reflected in this sample configuration file, as well as in the UPGRADE.txt file.
 ;
-tcpenable=<%= tcpenable %>                    ; Enable server for incoming TCP connections (default is no)
-tcpbindaddr=<%= tcpbindaddr %>             ; IP address for TCP server to bind to (0.0.0.0 binds to all interfaces)
+tcpenable=<%= @tcpenable %>                    ; Enable server for incoming TCP connections (default is no)
+tcpbindaddr=<%= @tcpbindaddr %>             ; IP address for TCP server to bind to (0.0.0.0 binds to all interfaces)
                                 ; Optionally add a port number, 192.168.1.1:5062 (default is port 5060)
 
-;tlsenable=no                   ; Enable server for incoming TLS (secure) connections (default is no)
-;tlsbindaddr=0.0.0.0            ; IP address for TLS server to bind to (0.0.0.0) binds to all interfaces)
-                                ; Optionally add a port number, 192.168.1.1:5063 (default is port 5061)
-                                ; Remember that the IP address must match the common name (hostname) in the
-                                ; certificate, so you don't want to bind a TLS socket to multiple IP addresses.
-                                ; For details how to construct a certificate for SIP see 
-                                ; http://tools.ietf.org/html/draft-ietf-sip-domain-certs
+tlsenable=<%= @tlsenable %>                   ; Enable server for incoming TLS (secure) connections (default is no)
+tlsbindaddr=<%= @tlsbindaddr %>            ; IP address for TLS server to bind to (0.0.0.0) binds to all interfaces)
+                                 ; Optionally add a port number, 192.168.1.1:5063 (default is port 5061)
+                                 ; Remember that the IP address must match the common name (hostname) in the
+                                 ; certificate, so you don't want to bind a TLS socket to multiple IP addresses.
+                                 ; For details how to construct a certificate for SIP see
+                                 ; http://tools.ietf.org/html/draft-ietf-sip-domain-certs
 
 ;tcpauthtimeout = 30            ; tcpauthtimeout specifies the maximum number
 				; of seconds a client has to authenticate.  If
@@ -469,24 +469,26 @@ srvlookup=yes                   ; Enable DNS SRV lookups on outbound calls
                       ; Set to yes add Reason header and use Reason header if it is available.
 ;
 ;------------------------ TLS settings ------------------------------------------------------------
-;tlscertfile=</path/to/certificate.pem> ; Certificate file (*.pem format only) to use for TLS connections
+
+<% if @tlsenable=='yes' %>
+tlscertfile=<%= @tlscertfile %> ; Certificate file (*.pem format only) to use for TLS connections
                                         ; default is to look for "asterisk.pem" in current directory
 
-;tlsprivatekey=</path/to/private.pem> ; Private key file (*.pem format only) for TLS connections.
+tlsprivatekey=<%= @tlsprivatekey %> ; Private key file (*.pem format only) for TLS connections.
                                       ; If no tlsprivatekey is specified, tlscertfile is searched for
                                       ; for both public and private key.
 
-;tlscafile=</path/to/certificate>
+tlscafile=<%= @tlscafile %>
 ;        If the server your connecting to uses a self signed certificate
 ;        you should have their certificate installed here so the code can
 ;        verify the authenticity of their certificate.
 
-;tlscapath=</path/to/ca/dir>
+tlscapath=<%= @tlscapath %>
 ;        A directory full of CA certificates.  The files must be named with
 ;        the CA subject name hash value.
 ;        (see man SSL_CTX_load_verify_locations for more info)
 
-;tlsdontverifyserver=[yes|no]
+tlsdontverifyserver=<%= @tlsdontverifyserver %>
 ;        If set to yes, don't verify the servers certificate when acting as
 ;        a client.  If you don't have the server's CA certificate you can
 ;        set this and it will connect without requiring tlscafile to be set.
@@ -500,6 +502,7 @@ srvlookup=yes                   ; Enable DNS SRV lookups on outbound calls
 ;tlsclientmethod=tlsv1     ; values include tlsv1, sslv3, sslv2.
                            ; Specify protocol for outbound client connections.
                            ; If left unspecified, the default is sslv2.
+<% end %>
 ;
 ;--------------------------- SIP timers ----------------------------------------------------
 ; These timers are used primarily in INVITE transactions.

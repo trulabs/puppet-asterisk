@@ -18,7 +18,14 @@ class asterisk::config (
   $rtpend,
   $udpbindaddr,
   $tcpenable,
-  $tcpbindaddr
+  $tcpbindaddr,
+  $tlsenable,
+  $tlsbindaddr,
+  $tlscertfile,
+  $tlsprivatekey,
+  $tlscafile,
+  $tlscapath,
+  $tlsdontverifyserver
 ) inherits asterisk {
   File {
     owner => 'root',

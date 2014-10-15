@@ -76,6 +76,34 @@
 #   String. Interface to bind TCP
 #   Default: 0.0.0.0
 # 
+# [*tlsenable*]
+#   String. Whether to enable TLS ('no' to disable)
+#   Default: no
+# 
+# [*tlsbindaddr*]
+#   String. Interface to bind TLS
+#   Default: 0.0.0.0:5061
+# 
+# [*tlscertfile*]
+#   String. Path to TLS certificate
+#   Default: './asterisk.pem'
+# 
+# [*tlsprivatekey*]
+#   String. Path to TLS certificate private key
+#   Default: './asterisk.pem'
+# 
+# [*tlscafile*]
+#   String. Path to TLS CA certificate
+#   Default: ''
+# 
+# [*tlscapath*]
+#   String. Path to the path of TLS CA certificates folder
+#   Default: ''
+# 
+# [*tlsdontverifyserver*]
+#   String. When acting as TLS client, whether asterisk should verify the server certificate 'yes' or 'no'
+#   Default: 'no'
+# 
 class asterisk(
   $service_enable = $asterisk::params::service_enable,
   $service_ensure = $asterisk::params::service_ensure,
@@ -89,11 +117,20 @@ class asterisk(
   $udpbindaddr    = $asterisk::params::udpbindaddr,
   $tcpenable      = $asterisk::params::tcpenable,
   $tcpbindaddr    = $asterisk::params::tcpbindaddr,
+  $tlsenable      = $asterisk::params::tlsenable,
+  $tlsbindaddr    = $asterisk::params::tlsbindaddr,
+  $tlscertfile    = $asterisk::params::tlscertfile,
+  $tlsprivatekey  = $asterisk::params::tlsprivatekey,
+  $tlscafile      = $asterisk::params::tlscafile,
+  $tlscapath      = $asterisk::params::tlscapath,
+  $tlsdontverifyserver = $asterisk::params::tlsdontverifyserver,
 ) inherits asterisk::params {
 
   validate_string($package_ensure, $package_name)
   validate_bool($service_enable, $service_manage, $manage_config)
   validate_string($udpbindaddr, $tcpenable, $tcpbindaddr)
+  validate_string($tlsenable, $tlsbindaddr, $tlscertfile)
+  validate_string($tlsprivatekey, $tlscafile, $tlscapath, $tlsdontverifyserver)
 
   class { '::asterisk::install':
     package_ensure  => $package_ensure,
@@ -107,6 +144,13 @@ class asterisk(
     udpbindaddr   => $udpbindaddr,
     tcpenable     => $tcpenable,
     tcpbindaddr   => $tcpbindaddr,
+    tlsenable     => $tlsenable,
+    tlsbindaddr   => $tlsbindaddr,
+    tlscertfile   => $tlscertfile,
+    tlsprivatekey => $tlsprivatekey,
+    tlscafile     => $tlscafile,
+    tlscapath     => $tlscapath,
+    tlsdontverifyserver   => $tlsdontverifyserver,
   }  ->
   class { '::asterisk::service':
     service_ensure => $service_ensure,
