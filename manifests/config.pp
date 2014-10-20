@@ -75,7 +75,7 @@ class asterisk::config (
 
   # Ask Asterisk to reload the SIP configuration
   exec { 'asterisk-sip-reload':
-    command     => "/usr/sbin/asterisk -rx 'sip reload'",
+    command     => '/usr/sbin/asterisk -rx "sip reload"',
     refreshonly => true,
   }
 }
