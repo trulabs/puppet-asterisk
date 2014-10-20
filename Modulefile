@@ -1,5 +1,5 @@
 name         'trulabs-asterisk'
-version      '0.0.2'
+version      '0.0.3'
 source       'git://github.com/trulabs/puppet-asterisk'
 author       'trulabs'
 license      'see LICENSE'
