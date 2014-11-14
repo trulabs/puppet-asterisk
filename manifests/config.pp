@@ -34,12 +34,14 @@ class asterisk::config (
   }
 
   if ($manage_config) {
-    file { '/etc/default/asterisk':
-      ensure  => file,
-      mode    => '0644',
-      path    => '/etc/default/asterisk',
-      content => template('asterisk/etc_default_asterisk.erb'),
-      notify  => Service['asterisk'], # restart asterisk when this changes
+    if ($::osfamily == 'Debian') {
+      file { '/etc/default/asterisk':
+        ensure  => file,
+        mode    => '0644',
+        path    => '/etc/default/asterisk',
+        content => template('asterisk/etc_default_asterisk.erb'),
+        notify  => Service['asterisk'], # restart asterisk when this changes
+      }
     }
 
     file { '/etc/asterisk/asterisk.conf':
