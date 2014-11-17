@@ -106,7 +106,7 @@ class asterisk::config (
     }
 
     # Validation step
-    if ( $ari_enabled == 'yes' && $http_enabled == 'no') {
+    if ( $ari_enabled == 'yes' and $http_enabled == 'no') {
       warn("ARI is enabled but HTTP is not. ARI will not be available.")
     }
     # ARI configuration

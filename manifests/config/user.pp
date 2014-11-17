@@ -21,8 +21,8 @@
 # configuration.
 #
 #     class { '::asterisk':
-#         manage_config => true,
-#         amienabled    => 'yes',
+#         manage_config   => true,
+#         manager_enabled => 'yes',
 #     }
 #     # Add an AMI user
 #     asterisk::config::user('/etc/asterisk/manager.conf','asterisk','asterisk')
