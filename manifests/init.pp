@@ -52,9 +52,45 @@
 #   Boolean. Whether Puppet should manage the configuration files.
 #   Default: true
 #
+# [*ari_enabled*]
+#   String. Enable the ARI interface in Asterisk.
+#   Options: 'yes', 'no'
+#   Default: 'no'
+#
 # [*ast_dumpcore*]
 #   String. Whether Asterisk should create core dumps ('no' is false, anything else is true)
 #   Default: no
+#
+# [*http_bindaddr*]
+#   String. Interface to bind HTTP service.
+#   Default: '0.0.0.0'
+#
+# [*http_enabled*]
+#   String. Enable the HTTP interface in Asterisk. Should be 'yes' if you also enable ARI.
+#   Options: 'yes', 'no'
+#   Default: 'no'
+#
+# [*http_port*]
+#   String. Port to bind HTTP service.
+#   Default: '8088'
+#
+# [*manager_bindaddr*]
+#   String. Interface to bind AMI service.
+#   Default: '0.0.0.0'
+#
+# [*manager_enabled*]
+#   String. Enable the Manager(AMI) interface in Asterisk.
+#   Options: 'yes', 'no'
+#   Default: 'no'
+#
+# [*manager_port*]
+#   String. Port to bind AMI service.
+#   Default: '5038'
+#
+# [*manager_webenabled*]
+#   String. Web Enable the Manager(AMI) interface in Asterisk.
+#   Options: 'yes', 'no'
+#   Default: 'no'
 #
 # [*rtpstart*]
 #   String. Lower limit for RTP port range
@@ -105,29 +141,39 @@
 #   Default: 'no'
 #
 class asterisk(
-  $service_enable = $asterisk::params::service_enable,
-  $service_ensure = $asterisk::params::service_ensure,
-  $service_manage = $asterisk::params::service_manage,
-  $package_ensure = $asterisk::params::package_ensure,
-  $package_name   = $asterisk::params::package_name,
-  $manage_config  = $asterisk::params::manage_config,
-  $ast_dumpcore   = $asterisk::params::ast_dumpcore,
-  $rtpstart       = $asterisk::params::rtpstart,
-  $rtpend         = $asterisk::params::rtpend,
-  $udpbindaddr    = $asterisk::params::udpbindaddr,
-  $tcpenable      = $asterisk::params::tcpenable,
-  $tcpbindaddr    = $asterisk::params::tcpbindaddr,
-  $tlsenable      = $asterisk::params::tlsenable,
-  $tlsbindaddr    = $asterisk::params::tlsbindaddr,
-  $tlscertfile    = $asterisk::params::tlscertfile,
-  $tlsprivatekey  = $asterisk::params::tlsprivatekey,
-  $tlscafile      = $asterisk::params::tlscafile,
-  $tlscapath      = $asterisk::params::tlscapath,
+  $service_enable      = $asterisk::params::service_enable,
+  $service_ensure      = $asterisk::params::service_ensure,
+  $service_manage      = $asterisk::params::service_manage,
+  $package_ensure      = $asterisk::params::package_ensure,
+  $package_name        = $asterisk::params::package_name,
+  $manage_config       = $asterisk::params::manage_config,
+  $ari_enabled         = $asterisk::params::ari_enabled,
+  $ast_dumpcore        = $asterisk::params::ast_dumpcore,
+  $http_enabled        = $asterisk::params::http_enabled,
+  $http_bindaddr       = $asterisk::params::http_bindaddr,
+  $http_port           = $asterisk::params::http_port,
+  $manager_bindaddr    = $asterisk::params::manager_bindaddr,
+  $manager_enabled     = $asterisk::params::manager_enabled,
+  $manager_port        = $asterisk::params::manager_port,
+  $manager_webenabled  = $asterisk::params::manager_webenabled,
+  $rtpstart            = $asterisk::params::rtpstart,
+  $rtpend              = $asterisk::params::rtpend,
+  $udpbindaddr         = $asterisk::params::udpbindaddr,
+  $tcpenable           = $asterisk::params::tcpenable,
+  $tcpbindaddr         = $asterisk::params::tcpbindaddr,
+  $tlsenable           = $asterisk::params::tlsenable,
+  $tlsbindaddr         = $asterisk::params::tlsbindaddr,
+  $tlscertfile         = $asterisk::params::tlscertfile,
+  $tlsprivatekey       = $asterisk::params::tlsprivatekey,
+  $tlscafile           = $asterisk::params::tlscafile,
+  $tlscapath           = $asterisk::params::tlscapath,
   $tlsdontverifyserver = $asterisk::params::tlsdontverifyserver,
 ) inherits asterisk::params {
 
   validate_string($package_ensure, $package_name)
   validate_bool($service_enable, $service_manage, $manage_config)
+  validate_string($manager_enabled, $manager_webenabled, $manager_bindaddr, $manager_port)
+  validate_string($ari_enabled, $http_webenabled, $http_bindaddr, $http_port)
   validate_string($udpbindaddr, $tcpenable, $tcpbindaddr)
   validate_string($tlsenable, $tlsbindaddr, $tlscertfile)
   validate_string($tlsprivatekey, $tlscafile, $tlscapath, $tlsdontverifyserver)
@@ -137,20 +183,28 @@ class asterisk(
     package_name    => $package_name,
   } ->
   class { '::asterisk::config':
-    manage_config => $manage_config,
-    ast_dumpcore  => $ast_dumpcore,
-    rtpstart      => $rtpstart,
-    rtpend        => $rtpend,
-    udpbindaddr   => $udpbindaddr,
-    tcpenable     => $tcpenable,
-    tcpbindaddr   => $tcpbindaddr,
-    tlsenable     => $tlsenable,
-    tlsbindaddr   => $tlsbindaddr,
-    tlscertfile   => $tlscertfile,
-    tlsprivatekey => $tlsprivatekey,
-    tlscafile     => $tlscafile,
-    tlscapath     => $tlscapath,
-    tlsdontverifyserver   => $tlsdontverifyserver,
+    manage_config       => $manage_config,
+    ari_enabled         => $ari_enabled,
+    ast_dumpcore        => $ast_dumpcore,
+    http_bindaddr       => $http_bindaddr,
+    http_enabled        => $http_enabled,
+    http_port           => $http_port,
+    manager_bindaddr    => $manager_bindaddr,
+    manager_enabled     => $manager_enabled,
+    manager_port        => $manager_port,
+    manager_webenabled  => $manager_webenabled,
+    rtpstart            => $rtpstart,
+    rtpend              => $rtpend,
+    udpbindaddr         => $udpbindaddr,
+    tcpenable           => $tcpenable,
+    tcpbindaddr         => $tcpbindaddr,
+    tlsenable           => $tlsenable,
+    tlsbindaddr         => $tlsbindaddr,
+    tlscertfile         => $tlscertfile,
+    tlsprivatekey       => $tlsprivatekey,
+    tlscafile           => $tlscafile,
+    tlscapath           => $tlscapath,
+    tlsdontverifyserver => $tlsdontverifyserver,
   }  ->
   class { '::asterisk::service':
     service_ensure => $service_ensure,
