@@ -26,6 +26,7 @@ class asterisk::params {
   $manager_bindaddr    = '127.0.0.1'
   $manager_enabled     = 'no'
   $manager_port        = '5038'
+  $manager_webenabled  = 'no'
   $rtpstart            = '10000'
   $rtpend              = '20000'
   $udpbindaddr         = '0.0.0.0'

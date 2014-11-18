@@ -102,6 +102,10 @@ Enable the Asterisk Manager Interface (AMI) ('yes' or 'no').
 
 TCP Port for the Asterisk Manager Interface (AMI) ('5038').
 
+#####`manager_webenabled`
+
+Web Enable the Asterisk Manager Interface (AMI) ('yes' or 'no').
+
 #####`rtpstart`
 
 Lower limit for RTP port range.
