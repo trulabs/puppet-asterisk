@@ -59,7 +59,7 @@
 #
 # [*ast_dumpcore*]
 #   String. Whether Asterisk should create core dumps ('no' is false, anything else is true)
-#   Default: no
+#   Default: 'no'
 #
 # [*http_bindaddr*]
 #   String. Interface to bind HTTP service.
@@ -106,19 +106,19 @@
 #
 # [*tcpenable*]
 #   String. Whether to enable TCP ('no' to disable)
-#   Default: no
+#   Default: 'no'
 #
 # [*tcpbindaddr*]
 #   String. Interface to bind TCP
-#   Default: 0.0.0.0
+#   Default: '0.0.0.0'
 #
 # [*tlsenable*]
 #   String. Whether to enable TLS ('no' to disable)
-#   Default: no
+#   Default: 'no'
 #
 # [*tlsbindaddr*]
 #   String. Interface to bind TLS
-#   Default: 0.0.0.0:5061
+#   Default: '0.0.0.0:5061'
 #
 # [*tlscertfile*]
 #   String. Path to TLS certificate
