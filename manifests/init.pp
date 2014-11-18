@@ -173,7 +173,7 @@ class asterisk(
   validate_string($package_ensure, $package_name)
   validate_bool($service_enable, $service_manage, $manage_config)
   validate_string($manager_enabled, $manager_webenabled, $manager_bindaddr, $manager_port)
-  validate_string($ari_enabled, $http_webenabled, $http_bindaddr, $http_port)
+  validate_string($ari_enabled, $http_enabled, $http_bindaddr, $http_port)
   validate_string($udpbindaddr, $tcpenable, $tcpbindaddr)
   validate_string($tlsenable, $tlsbindaddr, $tlscertfile)
   validate_string($tlsprivatekey, $tlscafile, $tlscapath, $tlsdontverifyserver)
