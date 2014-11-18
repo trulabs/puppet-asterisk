@@ -9,3 +9,4 @@ project_page 'http://github.com/trulabs/puppet-asterisk'
 
 ## Add dependencies, if any:
 dependency 'puppetlabs/stdlib'
+dependency 'puppetlabs/concat'

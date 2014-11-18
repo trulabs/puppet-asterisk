@@ -79,13 +79,18 @@ class asterisk::config (
       notify  => Exec['asterisk-sip-reload'],
     }
 
-    # Manager/AMI configuration
-    concat{'/etc/asterisk/manager.conf':
-      owner  => 'asterisk',
+    # Default settings for all config files created with concat
+    Concat {
+      ensure => present,
+      owner  => 'root',
       group  => 'asterisk',
       mode   => '0440',
-      notify => Service['asterisk'], #restart asterisk when ami.conf changes
+      warn   => true,
+      notify => Service['asterisk']
     }
+
+    # Manager/AMI configuration
+    concat { '/etc/asterisk/manager.conf': }
     concat::fragment { 'manager_header':
       target  => '/etc/asterisk/manager.conf',
       content => template('asterisk/manager.conf.erb'),
@@ -93,12 +98,7 @@ class asterisk::config (
     }
 
     # HTTP configuration
-    concat{'/etc/asterisk/http.conf':
-      owner  => 'asterisk',
-      group  => 'asterisk',
-      mode   => '0440',
-      notify => Service['asterisk'], #restart asterisk when ami.conf changes
-    }
+    concat { '/etc/asterisk/http.conf': }
     concat::fragment { 'http_header':
       target  => '/etc/asterisk/http.conf',
       content => template('asterisk/http.conf.erb'),
@@ -110,12 +110,7 @@ class asterisk::config (
       warn("ARI is enabled but HTTP is not. ARI will not be available.")
     }
     # ARI configuration
-    concat{'/etc/asterisk/ari.conf':
-      owner  => 'asterisk',
-      group  => 'asterisk',
-      mode   => '0440',
-      notify => Service['asterisk'], #restart asterisk when ami.conf changes
-    }
+    concat{'/etc/asterisk/ari.conf': }
     concat::fragment { 'ari_header':
       target  => '/etc/asterisk/ari.conf',
       content => template('asterisk/ari.conf.erb'),

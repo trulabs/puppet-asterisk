@@ -10,7 +10,7 @@
 #    *REQUIRED* Target file that the user credentials should be stored
 #    to.
 #
-#  [*username*]
+#  [*user*]
 #    *REQUIRED* Username for credentials. No default.
 #
 #  [*secret*]
@@ -25,17 +25,21 @@
 #         manager_enabled => 'yes',
 #     }
 #     # Add an AMI user
-#     asterisk::config::user('/etc/asterisk/manager.conf','asterisk','asterisk')
+#     asterisk::config::user{'/etc/asterisk/manager.conf':
+#         user   => 'ami_user',
+#         secret => 'ami_secret',}
 #     # Add an ARI user
-#     asterisk::config::user('/etc/asterisk/ari.conf','asterisk','asterisk')
+#     asterisk::config::user{'/etc/asterisk/ari.conf':
+#         user   => hiera('asterisk::ari::user','ari_user),
+#         secret => hiera('asterisk::ari::secret','ari_secret'),}
 #
-define asterisk::config::user ($target, $username, $secret="") {
-  validate_string($target, $username, $secret)
+define asterisk::config::user ($target = $title, $user, $secret="") {
+  validate_string($target, $user, $secret)
 
   # Ensure unique title based on target and username
-  $title = regsubst("${target}_user_${user}",'[/\.]','_')
-  concat::fragment{$title:
-    target  => $target,
+  $safe_title = regsubst("${target}_user_${user}",'[/\.]','_')
+  concat::fragment{$safe_title:
+    target  => $title,
     content => "[${user}]\nsecret = ${secret}\n",
     order   => 20
   }
