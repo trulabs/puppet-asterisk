@@ -13,7 +13,15 @@
 
 class asterisk::config (
   $manage_config,
+  $ari_enabled,
   $ast_dumpcore,
+  $http_bindaddr,
+  $http_enabled,
+  $http_port,
+  $manager_bindaddr,
+  $manager_enabled,
+  $manager_port,
+  $manager_webenabled,
   $rtpstart,
   $rtpend,
   $udpbindaddr,
@@ -69,6 +77,44 @@ class asterisk::config (
       path    => '/etc/asterisk/sip.conf',
       content => template('asterisk/sip.conf.erb'),
       notify  => Exec['asterisk-sip-reload'],
+    }
+
+    # Default settings for all config files created with concat
+    Concat {
+      ensure => present,
+      owner  => 'root',
+      group  => 'asterisk',
+      mode   => '0440',
+      warn   => true,
+      notify => Service['asterisk']
+    }
+
+    # Manager/AMI configuration
+    concat { '/etc/asterisk/manager.conf': }
+    concat::fragment { 'manager_header':
+      target  => '/etc/asterisk/manager.conf',
+      content => template('asterisk/manager.conf.erb'),
+      order   => 1,
+    }
+
+    # HTTP configuration
+    concat { '/etc/asterisk/http.conf': }
+    concat::fragment { 'http_header':
+      target  => '/etc/asterisk/http.conf',
+      content => template('asterisk/http.conf.erb'),
+      order   => 1,
+    }
+
+    # Validation step
+    if ( $ari_enabled == 'yes' and $http_enabled == 'no') {
+      warn("ARI is enabled but HTTP is not. ARI will not be available.")
+    }
+    # ARI configuration
+    concat{'/etc/asterisk/ari.conf': }
+    concat::fragment { 'ari_header':
+      target  => '/etc/asterisk/ari.conf',
+      content => template('asterisk/ari.conf.erb'),
+      order   => 1,
     }
 
     # TODO /etc/init.d/asterisk

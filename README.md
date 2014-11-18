@@ -70,9 +70,41 @@ Name of the asterisk package.
 
 Take care of configuration files, or delegate to something else external.
 
+#####`ari_enabled`
+
+Enable the Asterisk Restful Interface (ARI) ('yes' or 'no').
+
 #####`ast_dump_core`
 
 Create core dumps ('no' is false, everything else true).
+
+#####`http_bindaddr`
+
+Bind address for the Asterisk HTTP interface ('0.0.0.0')
+
+#####`http_enabled`
+
+Enable the Asterisk HTTP interface ('yes' or 'no').
+
+#####`http_port`
+
+TCP Port for the Asterisk HTTP interface ('8088').
+
+#####`manager_bindaddr`
+
+Bind address for the Asterisk Manager Interface (AMI) ('0.0.0.0')
+
+#####`manager_enabled`
+
+Enable the Asterisk Manager Interface (AMI) ('yes' or 'no').
+
+#####`manager_port`
+
+TCP Port for the Asterisk Manager Interface (AMI) ('5038').
+
+#####`manager_webenabled`
+
+Web Enable the Asterisk Manager Interface (AMI) ('yes' or 'no').
 
 #####`rtpstart`
 
