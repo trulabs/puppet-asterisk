@@ -81,7 +81,6 @@ class asterisk::config (
 
     # Default settings for all config files created with concat
     Concat {
-      ensure => present,
       owner  => 'root',
       group  => 'asterisk',
       mode   => '0440',
