@@ -1,5 +1,5 @@
+# Test support for TLS
 node 'default' {
-
   class { '::asterisk':
     service_manage => true,
     service_enable => true,
