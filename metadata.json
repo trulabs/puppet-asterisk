@@ -8,7 +8,6 @@
       "name": "puppetlabs/concat"
     }
   ],
-  "description": "Asterisk Module",
   "license": "see LICENSE",
   "name": "trulabs-asterisk",
   "operatingsystem_support": [],
