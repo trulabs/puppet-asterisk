@@ -78,6 +78,13 @@ Enable the Asterisk Restful Interface (ARI) ('yes' or 'no').
 
 Create core dumps ('no' is false, everything else true).
 
+#####`ast*dir`
+
+Resource directories specified in the `asterisk.conf` file. Used to
+override defaults: `astetcdir, astetcdir, astmoddir, astvarlibdir,
+astdbdir, astkeydir, astdatadir, astagidir, astspooldir, astrundir,
+astlogdir`.
+
 #####`http_bindaddr`
 
 Bind address for the Asterisk HTTP interface ('0.0.0.0')
@@ -178,6 +185,21 @@ The module has been tested on:
 
 Run tests from the tests/ folder, e.g.:
     sudo puppet apply -v tests/init.pp --modulepath modules/:/etc/puppet/modules --show_diff --noop
+
+### Caveatt: puppetlabs/concat
+In order to successfully run a `--noop` test with the
+`puppetlabs/concat` module, you must first run a successful concat
+test so the module can compile a local shell script. A simple test
+might be:
+
+    # test-concat.pp
+    node default {
+        concat {'/tmp/foo.txt':}
+        concat::fragment {'foo.txt':
+            target  => '/tmp/foo.txt',
+            content => 'bar',
+        }
+    }
 
 ##Contributors
 The list of contributors can be found at: [https://github.com/trulabs/puppet-asterisk/graphs/contributors](https://github.com/trulabs/puppet-asterisk/graphs/contributors)

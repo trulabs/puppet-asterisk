@@ -1,14 +1,14 @@
 [directories](!)
-astetcdir => /etc/asterisk
-astmoddir => /usr/lib/asterisk/modules
-astvarlibdir => /var/lib/asterisk
-astdbdir => /var/lib/asterisk
-astkeydir => /var/lib/asterisk
-astdatadir => /usr/share/asterisk
-astagidir => /usr/share/asterisk/agi-bin
-astspooldir => /var/spool/asterisk
-astrundir => /var/run/asterisk
-astlogdir => /var/log/asterisk
+astetcdir => <%= @astetcdir || '/etc/asterisk' %>
+astmoddir => <%= @astmoddir || '/usr/lib/asterisk/modules' %>
+astvarlibdir => <%= @astvarlibdir || '/var/lib/asterisk' %>
+astdbdir => <%= @astdbdir || '/var/lib/asterisk' %>
+astkeydir => <%= @astkeydir || '/var/lib/asterisk' %>
+astdatadir => <%= @astdatadir || '/usr/share/asterisk' %>
+astagidir => <%= @astagidir || '/usr/share/asterisk/agi-bin' %>
+astspooldir => <%= @astspooldir || '/var/spool/asterisk' %>
+astrundir => <%= @astrundir || '/var/run/asterisk' %>
+astlogdir => <%= @astlogdir || '/var/log/asterisk' %>
 
 [options]
 ;verbose = 3
