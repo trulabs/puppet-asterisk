@@ -61,6 +61,46 @@
 #   String. Whether Asterisk should create core dumps ('no' is false, anything else is true)
 #   Default: 'no'
 #
+# [*astetcdir*]
+#   String. Directory configuration option in asterisk.conf
+#   Default: OS specific
+#
+# [*astmoddir*]
+#   String. Directory configuration option in asterisk.conf
+#   Default: OS specific
+#
+# [*astvarlibdir*]
+#   String. Directory configuration option in asterisk.conf
+#   Default: OS specific
+#
+# [*astdbdir*]
+#   String. Directory configuration option in asterisk.conf
+#   Default: OS specific
+#
+# [*astkeydir*]
+#   String. Directory configuration option in asterisk.conf
+#   Default: OS specific
+#
+# [*astdatadir*]
+#   String. Directory configuration option in asterisk.conf
+#   Default: OS specific
+#
+# [*astagidir*]
+#   String. Directory configuration option in asterisk.conf
+#   Default: OS specific
+#
+# [*astspooldir*]
+#   String. Directory configuration option in asterisk.conf
+#   Default: OS specific
+#
+# [*astrundir*]
+#   String. Directory configuration option in asterisk.conf
+#   Default: OS specific
+#
+# [*astlogdir*]
+#   String. Directory configuration option in asterisk.conf
+#   Default: OS specific
+#
 # [*http_bindaddr*]
 #   String. Interface to bind HTTP service.
 #   Default: '0.0.0.0'
