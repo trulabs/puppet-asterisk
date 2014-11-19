@@ -1,0 +1,21 @@
+{
+  "author": "trulabs",
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib"
+    },
+    {
+      "name": "puppetlabs/concat"
+    }
+  ],
+  "description": "Asterisk Module",
+  "license": "see LICENSE",
+  "name": "trulabs-asterisk",
+  "operatingsystem_support": [],
+  "project_page": "http://github.com/trulabs/puppet-asterisk",
+  "requirements": [],
+  "source": "git://github.com/trulabs/puppet-asterisk",
+  "summary": "A module to manage Asterisk deployments.",
+  "tags": [],
+  "version": "0.0.4"
+}
