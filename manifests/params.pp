@@ -40,31 +40,36 @@ class asterisk::params {
   $tlscapath           = ''
   $tlsdontverifyserver = 'no'
 
-  if ${::osfamily} == 'Debian' {
-    $astetcdir = '/etc/asterisk'
-    $astmoddir = '/usr/lib/asterisk/modules'
-    $astvarlibdir = '/var/lib/asterisk'
-    $astdbdir ='/var/lib/asterisk'
-    $astkeydir = '/var/lib/asterisk'
-    $astdatadir = '/usr/share/asterisk'
-    $astagidir = '/usr/share/asterisk/agi-bin'
-    $astspooldir = '/var/spool/asterisk'
-    $astrundir = '/var/run/asterisk'
-    $astlogdir = '/var/log/asterisk'
-  } elsif ${::osfamily} == 'RedHat' {
-    $astetcdir = '/etc/asterisk'
-    $astmoddir = ${::architecture} ? {
-      /64/ => '/usr/lib64/asterisk/modules',
-      default => '/usr/lib/asterisk/modules',
+  case $::osfamily {
+    'Debian': {
+      $astetcdir = '/etc/asterisk'
+      $astmoddir = '/usr/lib/asterisk/modules'
+      $astvarlibdir = '/var/lib/asterisk'
+      $astdbdir ='/var/lib/asterisk'
+      $astkeydir = '/var/lib/asterisk'
+      $astdatadir = '/usr/share/asterisk'
+      $astagidir = '/usr/share/asterisk/agi-bin'
+      $astspooldir = '/var/spool/asterisk'
+      $astrundir = '/var/run/asterisk'
+      $astlogdir = '/var/log/asterisk'
     }
-    $astvarlibdir = '/var/lib/asterisk'
-    $astdbdir ='/var/lib/asterisk'
-    $astkeydir = '/var/lib/asterisk'
-    $astdatadir = '/var/lib/asterisk'
-    $astagidir = '/var/lib/asterisk/agi-bin'
-    $astspooldir = '/var/spool/asterisk'
-    $astrundir = '/var/run/asterisk'
-    $astlogdir = '/var/log/asterisk'
+    'RedHat': {
+      $astetcdir = '/etc/asterisk'
+      $astmoddir = $::architecture ? {
+        /64/ => '/usr/lib64/asterisk/modules',
+        default => '/usr/lib/asterisk/modules',
+      }
+      $astvarlibdir = '/var/lib/asterisk'
+      $astdbdir ='/var/lib/asterisk'
+      $astkeydir = '/var/lib/asterisk'
+      $astdatadir = '/var/lib/asterisk'
+      $astagidir = '/var/lib/asterisk/agi-bin'
+      $astspooldir = '/var/spool/asterisk'
+      $astrundir = '/var/run/asterisk'
+      $astlogdir = '/var/log/asterisk'
+    }
+    default: {
+      warning("OS ${::osfamily} default paths for ast*dir pramaters not provided.")
+    }
   }
-
 }
