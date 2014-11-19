@@ -39,7 +39,7 @@ define asterisk::config::user ($target = $title, $user, $secret="") {
   # Ensure unique title based on target and username
   $safe_title = regsubst("${target}_user_${user}",'[/\.]','_')
   concat::fragment{$safe_title:
-    target  => $title,
+    target  => $target,
     content => "[${user}]\nsecret = ${secret}\n",
     order   => 20
   }
