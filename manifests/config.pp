@@ -94,8 +94,7 @@ class asterisk::config (
       owner  => 'root',
       group  => 'asterisk',
       mode   => '0440',
-      warn   => true,
-      notify => Service['asterisk']
+      notify => Service['asterisk'],
     }
 
     # Manager/AMI configuration
