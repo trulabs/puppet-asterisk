@@ -43,7 +43,15 @@ class asterisk::config (
   $tlsprivatekey,
   $tlscafile,
   $tlscapath,
-  $tlsdontverifyserver
+  $tlsdontverifyserver,
+  $ext_static,
+  $ext_writeprotect,
+  $ext_autofallthrough,
+  $ext_patternmatchnew,
+  $ext_clearglobalvars,
+  $ext_userscontext,
+  $ext_includes,
+  $ext_execs,
 ) inherits asterisk {
   File {
     owner => 'root',
@@ -62,53 +70,54 @@ class asterisk::config (
       }
     }
 
-    file { '/etc/asterisk/asterisk.conf':
+    file { "${astetcdir}/asterisk.conf":
       ensure  => file,
       owner   => 'asterisk',
       group   => 'asterisk',
-      path    => '/etc/asterisk/asterisk.conf',
+      path    => "${astetcdir}/asterisk.conf",
       content => template('asterisk/asterisk.conf.erb'),
       notify  => Service['asterisk'], # restart asterisk when asterisk.conf changes
     }
 
-    file { '/etc/asterisk/rtp.conf':
+    file { "${astetcdir}/rtp.conf":
       ensure  => file,
       owner   => 'asterisk',
       group   => 'asterisk',
-      path    => '/etc/asterisk/rtp.conf',
+      path    => "${astetcdir}/rtp.conf",
       content => template('asterisk/rtp.conf.erb'),
       notify  => Service['asterisk'], # restart asterisk when rtp.conf changes
     }
 
-    file { '/etc/asterisk/sip.conf':
+    file { "${astetcdir}/sip.conf":
       ensure  => file,
       owner   => 'asterisk',
       group   => 'asterisk',
-      path    => '/etc/asterisk/sip.conf',
+      path    => "${astetcdir}/sip.conf",
       content => template('asterisk/sip.conf.erb'),
       notify  => Exec['asterisk-sip-reload'],
     }
 
     # Default settings for all config files created with concat
     Concat {
-      owner  => 'root',
+      owner  => 'asterisk',
       group  => 'asterisk',
       mode   => '0440',
+      warn   => false,
       notify => Service['asterisk'],
     }
 
     # Manager/AMI configuration
-    concat { '/etc/asterisk/manager.conf': }
+    concat { "${astetcdir}/manager.conf": }
     concat::fragment { 'manager_header':
-      target  => '/etc/asterisk/manager.conf',
+      target  => "${astetcdir}/manager.conf",
       content => template('asterisk/manager.conf.erb'),
       order   => 1,
     }
 
     # HTTP configuration
-    concat { '/etc/asterisk/http.conf': }
+    concat { "${astetcdir}/http.conf": }
     concat::fragment { 'http_header':
-      target  => '/etc/asterisk/http.conf',
+      target  => "${astetcdir}/http.conf",
       content => template('asterisk/http.conf.erb'),
       order   => 1,
     }
@@ -118,11 +127,19 @@ class asterisk::config (
       warning("ARI is enabled but HTTP is not. ARI will not be available.")
     }
     # ARI configuration
-    concat{'/etc/asterisk/ari.conf': }
+    concat{ "${astetcdir}/ari.conf": }
     concat::fragment { 'ari_header':
-      target  => '/etc/asterisk/ari.conf',
+      target  => "${astetcdir}/ari.conf",
       content => template('asterisk/ari.conf.erb'),
       order   => 1,
+    }
+
+    # Extensions
+    concat {"${astetcdir}/extensions.conf": }
+    concat::fragment {'extensions_general':
+      target  => "${astetcdir}/extensions.conf",
+      content => template('asterisk/extensions.conf.general.erb'),
+      order   => 5,
     }
 
     # TODO /etc/init.d/asterisk
