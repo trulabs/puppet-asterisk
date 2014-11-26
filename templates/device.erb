@@ -36,6 +36,9 @@ callgroup = <%= @callgroup %>
 <% if @callingpres != "" -%>
 callingpres = <%= @callingpres %>
 <% end -%>
+<% if @canreinvite != "" -%>
+canreinvite = <%= @canreinvite %>
+<% end -%>
 <% if @contactdeny != "" -%>
 contactdeny = <%= @contactdeny %>
 <% end -%>
@@ -154,16 +157,16 @@ secret = <%= @secret %>
 sendrpid = <%= @sendrpid %>
 <% end -%>
 <% if @session_expires != "" -%>
-session_expires = <%= @session_expires %>
+session-expires = <%= @session_expires %>
 <% end -%>
 <% if @session_minse != "" -%>
-session_minse = <%= @session_minse %>
+session-minse = <%= @session_minse %>
 <% end -%>
 <% if @session_refresher != "" -%>
-session_refresher = <%= @session_refresher %>
+session-refresher = <%= @session_refresher %>
 <% end -%>
 <% if @session_timers != "" -%>
-session_timers = <%= @session_timers %>
+session-timers = <%= @session_timers %>
 <% end -%>
 <% if @setvar != "" -%>
 setvar = <%= @setvar %>
@@ -172,7 +175,7 @@ setvar = <%= @setvar %>
 subscribecontext = <%= @subscribecontext %>
 <% end -%>
 <% if @t38pt_usertpsource != "" -%>
-t38pt_usertpsource = <%= @t38pt_usertpsource %>
+t38pt-usertpsource = <%= @t38pt_usertpsource %>
 <% end -%>
 <% if @template != "" -%>
 template = <%= @template %>
@@ -190,10 +193,10 @@ transport = <%= @transport %>
 trustrpid = <%= @trustrpid %>
 <% end -%>
 <% if @unsolicited_mailbox != "" -%>
-unsolicited_mailbox = <%= @unsolicited_mailbox %>
+unsolicited-mailbox = <%= @unsolicited_mailbox %>
 <% end -%>
 <% if @use_q850_reason != "" -%>
-use_q850_reason = <%= @use_q850_reason %>
+use-q850-reason = <%= @use_q850_reason %>
 <% end -%>
 <% if @useclientcode != "" -%>
 useclientcode = <%= @useclientcode %>

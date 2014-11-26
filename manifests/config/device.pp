@@ -40,6 +40,7 @@ define asterisk::config::device (
   $callerid = '',
   $callgroup = '',
   $callingpres = '',
+  $canreinvite = '',
   $contactdeny = '',
   $contactpermit = '',
   $context = '',
@@ -64,7 +65,7 @@ define asterisk::config::device (
   $md5secret = '',
   $nat = '',
   $outboundproxy = '',
-  $permit = '',
+  $permit = [],
   $pickupgroup = '',
   $port = '',
   $progressinband = '',
@@ -104,6 +105,7 @@ define asterisk::config::device (
   validate_string ($allowoverlap, $allowsubscribe, $allowtransfer,)
   validate_string ($amaflags, $busylevel, $callbackextension,)
   validate_string ($callcounter, $callerid, $callgroup, $callingpres,)
+  validate_string ($canreinvite)
   validate_string ($contactdeny, $contactpermit, $context, $defaultip,)
   validate_string ($defaultuser, $directmedia,)
   validate_string ($directmediadeny,$directmediapermit)
