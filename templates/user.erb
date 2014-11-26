@@ -1,0 +1,19 @@
+[<%= @user %>]
+<% if @secret != "" -%>
+secret = <%= @secret %>
+<% end -%>
+<% if @read != "" -%>
+read = <%= @read %>
+<% end -%>
+<% if @write != "" -%>
+write = <%= @write %>
+<% end -%>
+<% Array(@deny).each do |d| -%>
+deny = <%= d %>
+<% end -%>
+<% Array(@permit).each do |p| -%>
+permit = <%= p %>
+<% end -%>
+<% Array(@eventfilter).each do |ef| -%>
+eventfilter = <%= ef %>
+<% end -%>
