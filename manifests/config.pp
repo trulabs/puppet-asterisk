@@ -88,15 +88,6 @@ class asterisk::config (
       notify  => Service['asterisk'], # restart asterisk when rtp.conf changes
     }
 
-    file { "${astetcdir}/sip.conf":
-      ensure  => file,
-      owner   => 'asterisk',
-      group   => 'asterisk',
-      path    => "${astetcdir}/sip.conf",
-      content => template('asterisk/sip.conf.erb'),
-      notify  => Exec['asterisk-sip-reload'],
-    }
-
     # Default settings for all config files created with concat
     Concat {
       owner  => 'asterisk',
@@ -104,6 +95,26 @@ class asterisk::config (
       mode   => '0440',
       warn   => false,
       notify => Service['asterisk'],
+    }
+
+    # SIP configuration
+    concat {"${astetcdir}/sip.conf":
+      notify => Exec['asterisk-sip-reload'],
+    }
+    concat::fragment { 'sip_general':
+      target  => "${astetcdir}/sip.conf",
+      content => template('asterisk/sip.conf.erb'),
+      order   => 10,
+    }
+    concat::fragment { 'sip_authentication':
+      target  => "${astetcdir}/sip.conf",
+      content => template('asterisk/sip.conf.authentication.erb'),
+      order   => 20,
+    }
+    concat::fragment { 'sip_devices':
+      target  => "${astetcdir}/sip.conf",
+      content => template('asterisk/sip.conf.devices.erb'),
+      order   => 40,
     }
 
     # Manager/AMI configuration
