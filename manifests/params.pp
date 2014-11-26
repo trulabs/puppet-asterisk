@@ -72,4 +72,14 @@ class asterisk::params {
       warning("OS ${::osfamily} default paths for ast*dir pramaters not provided.")
     }
   }
+
+  # Extensions configuration
+  $ext_static = 'yes'
+  $ext_writeprotect = 'yes'
+  $ext_autofallthrough = 'yes'
+  $ext_patternmatchnew = 'no'
+  $ext_clearglobalvars = 'no'
+  $ext_userscontext = 'default'
+  $ext_includes = []
+  $ext_execs = []
 }

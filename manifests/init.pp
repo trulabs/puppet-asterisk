@@ -180,44 +180,92 @@
 #   String. When acting as TLS client, whether asterisk should verify the server certificate 'yes' or 'no'
 #   Default: 'no'
 #
+# ==== extension.conf Options
+# [*ext_static*]
+#   String. If 'no' or omitted, then the pbx_config will rewrite the
+#     extensions.conf file when extensions are modified.
+#   Default: 'yes'
+#
+#   CAUTION: Changing to 'no' may have unpredictable results when configuring with Puppet.
+#
+# [*ext_writeprotect*]
+#   String. If static=yes and writeprotect=no, you can save dialplan
+#     by CLI command "dialplan save" in the extensions.conf file.
+#   Default: 'yes'
+#
+#   CAUTION: Changing to 'no' may have unpredictable results when configuring with Puppet.
+#
+# [*ext_autofallthrough*]
+#   String. If an extention runs out of things to do, wait 'yes' or terminate 'no'
+#   Default: 'yes' (strongly recommended)
+#
+# [*ext_patternmatchnew*]
+#   String. Beta feature for new patern matching behavior for extensions.
+#   Default: 'no'
+#
+# [*ext_clearglobalvars*]
+#   String.  Clear global variables on a dialplan reload or Asterisk reload.
+#   Default: 'no'
+#
+# [*ext_userscontext*]
+#   String. Context is where entries from users.conf are registered
+#   Default: 'default'
+#
+# [*ext_includes*]
+#   Array of Strings. Specify paths of files to `#include` in the
+#     extensions.conf file.
+#   Default: []
+#
+# [*ext_execs*]
+#   Array of Strings. Execute a program(s) or script that produces config files
+#   Default: []
+#
 class asterisk(
-  $service_enable      = $asterisk::params::service_enable,
-  $service_ensure      = $asterisk::params::service_ensure,
-  $service_manage      = $asterisk::params::service_manage,
-  $package_ensure      = $asterisk::params::package_ensure,
-  $package_name        = $asterisk::params::package_name,
-  $manage_config       = $asterisk::params::manage_config,
-  $ari_enabled         = $asterisk::params::ari_enabled,
-  $ast_dumpcore        = $asterisk::params::ast_dumpcore,
-  $astetcdir           = $asterisk::params::astetcdir,
-  $astmoddir           = $asterisk::params::astmoddir,
-  $astvarlibdir        = $asterisk::params::astvarlibdir,
-  $astdbdir            = $asterisk::params::astdbdir,
-  $astkeydir           = $asterisk::params::astkeydir,
-  $astdatadir          = $asterisk::params::astdatadir,
-  $astagidir           = $asterisk::params::astagidir,
-  $astspooldir         = $asterisk::params::astspooldir,
-  $astrundir           = $asterisk::params::astrundir,
-  $astlogdir           = $asterisk::params::astlogdir,
-  $http_enabled        = $asterisk::params::http_enabled,
-  $http_bindaddr       = $asterisk::params::http_bindaddr,
-  $http_port           = $asterisk::params::http_port,
-  $manager_bindaddr    = $asterisk::params::manager_bindaddr,
-  $manager_enabled     = $asterisk::params::manager_enabled,
-  $manager_port        = $asterisk::params::manager_port,
-  $manager_webenabled  = $asterisk::params::manager_webenabled,
-  $rtpstart            = $asterisk::params::rtpstart,
-  $rtpend              = $asterisk::params::rtpend,
-  $udpbindaddr         = $asterisk::params::udpbindaddr,
-  $tcpenable           = $asterisk::params::tcpenable,
-  $tcpbindaddr         = $asterisk::params::tcpbindaddr,
-  $tlsenable           = $asterisk::params::tlsenable,
-  $tlsbindaddr         = $asterisk::params::tlsbindaddr,
-  $tlscertfile         = $asterisk::params::tlscertfile,
-  $tlsprivatekey       = $asterisk::params::tlsprivatekey,
-  $tlscafile           = $asterisk::params::tlscafile,
-  $tlscapath           = $asterisk::params::tlscapath,
-  $tlsdontverifyserver = $asterisk::params::tlsdontverifyserver,
+  $service_enable           = $asterisk::params::service_enable,
+  $service_ensure           = $asterisk::params::service_ensure,
+  $service_manage           = $asterisk::params::service_manage,
+  $package_ensure           = $asterisk::params::package_ensure,
+  $package_name             = $asterisk::params::package_name,
+  $manage_config            = $asterisk::params::manage_config,
+  $ari_enabled              = $asterisk::params::ari_enabled,
+  $ast_dumpcore             = $asterisk::params::ast_dumpcore,
+  $astetcdir                = $asterisk::params::astetcdir,
+  $astmoddir                = $asterisk::params::astmoddir,
+  $astvarlibdir             = $asterisk::params::astvarlibdir,
+  $astdbdir                 = $asterisk::params::astdbdir,
+  $astkeydir                = $asterisk::params::astkeydir,
+  $astdatadir               = $asterisk::params::astdatadir,
+  $astagidir                = $asterisk::params::astagidir,
+  $astspooldir              = $asterisk::params::astspooldir,
+  $astrundir                = $asterisk::params::astrundir,
+  $astlogdir                = $asterisk::params::astlogdir,
+  $http_enabled             = $asterisk::params::http_enabled,
+  $http_bindaddr            = $asterisk::params::http_bindaddr,
+  $http_port                = $asterisk::params::http_port,
+  $manager_bindaddr         = $asterisk::params::manager_bindaddr,
+  $manager_enabled          = $asterisk::params::manager_enabled,
+  $manager_port             = $asterisk::params::manager_port,
+  $manager_webenabled       = $asterisk::params::manager_webenabled,
+  $rtpstart                 = $asterisk::params::rtpstart,
+  $rtpend                   = $asterisk::params::rtpend,
+  $udpbindaddr              = $asterisk::params::udpbindaddr,
+  $tcpenable                = $asterisk::params::tcpenable,
+  $tcpbindaddr              = $asterisk::params::tcpbindaddr,
+  $tlsenable                = $asterisk::params::tlsenable,
+  $tlsbindaddr              = $asterisk::params::tlsbindaddr,
+  $tlscertfile              = $asterisk::params::tlscertfile,
+  $tlsprivatekey            = $asterisk::params::tlsprivatekey,
+  $tlscafile                = $asterisk::params::tlscafile,
+  $tlscapath                = $asterisk::params::tlscapath,
+  $tlsdontverifyserver      = $asterisk::params::tlsdontverifyserver,
+  $ext_static               = $asterisk::params::ext_static,
+  $ext_writeprotect         = $asterisk::params::ext_writeprotect,
+  $ext_autofallthrough      = $asterisk::params::ext_autofallthrough,
+  $ext_patternmatchnew      = $asterisk::params::ext_patternmatchnew,
+  $ext_clearglobalvars      = $asterisk::params::ext_clearglobalvars,
+  $ext_userscontext         = $asterisk::params::ext_userscontext,
+  $ext_includes             = $asterisk::params::ext_includes,
+  $ext_execs                = $asterisk::params::ext_execs,
 ) inherits asterisk::params {
 
   validate_string($package_ensure, $package_name)
@@ -227,6 +275,9 @@ class asterisk(
   validate_string($udpbindaddr, $tcpenable, $tcpbindaddr)
   validate_string($tlsenable, $tlsbindaddr, $tlscertfile)
   validate_string($tlsprivatekey, $tlscafile, $tlscapath, $tlsdontverifyserver)
+  validate_string($ext_writeprotect, $ext_autofallthrough, $ext_patternmatchnew)
+  validate_string($ext_static, $ext_clearglobalvars, $ext_userscontext)
+  validate_array($ext_includes, $ext_execs)
 
   class { '::asterisk::install':
     package_ensure  => $package_ensure,
@@ -265,6 +316,14 @@ class asterisk(
     tlscafile           => $tlscafile,
     tlscapath           => $tlscapath,
     tlsdontverifyserver => $tlsdontverifyserver,
+    ext_static          => $ext_static,
+    ext_writeprotect    => $ext_writeprotect,
+    ext_autofallthrough => $ext_autofallthrough,
+    ext_patternmatchnew => $ext_patternmatchnew,
+    ext_clearglobalvars => $ext_clearglobalvars,
+    ext_userscontext    => $ext_userscontext,
+    ext_includes        => $ext_includes,
+    ext_execs           => $ext_execs,
   }  ->
   class { '::asterisk::service':
     service_ensure => $service_ensure,
