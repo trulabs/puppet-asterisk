@@ -125,19 +125,19 @@ define asterisk::config::device (
   validate_string ($trustrpid, $unsolicited_mailbox, $use_q850_reason,)
   validate_string ($useclientcode, $username, $videosupport)
 
-  $types = ['friend', 'peer', 'user']
-  unless $type in ($types) {
-    fail("Device ${device_name} type ${type} must be in ${types}.")
+
+  if !($type =~ /friend|peer|user/) {
+    fail("Device ${device_name} type ${type} must be one of 'friend', 'peer', or 'user'.")
   }
 
   if size($allow) > 1 {
-    unless $disallow[0] == 'all' {
+    if !($disallow[0] == 'all') {
       fail("Device ${device_name}: If using multiple `allow` parameters, you must set `disallow => ['all']`.")
     }
   }
 
   if size($disallow) > 1 {
-    unless $allow[0] == 'all' {
+    if !($allow[0] == 'all') {
       fail("Device ${device_name}: If using multiple `disallow` parameters, you must set `allow => ['all']`.")
     }
   }
