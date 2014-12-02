@@ -1,0 +1,209 @@
+[<%= @device_name %>]
+type = <%= @type %>
+<% if @accountcode != "" -%>
+accountcode = <%= @accountcode %>
+<% end -%>
+<% Array(@allow).each do |a| -%>
+allow = <%= a %>
+<% end -%>
+<% if @allowoverlap != "" -%>
+allowoverlap = <%= @allowoverlap %>
+<% end -%>
+<% if @allowsubscribe != "" -%>
+allowsubscribe = <%= @allowsubscribe %>
+<% end -%>
+<% if @allowtransfer != "" -%>
+allowtransfer = <%= @allowtransfer %>
+<% end -%>
+<% if @amaflags != "" -%>
+amaflags = <%= @amaflags %>
+<% end -%>
+<% if @busylevel != "" -%>
+busylevel = <%= @busylevel %>
+<% end -%>
+<% if @callbackextension != "" -%>
+callbackextension = <%= @callbackextension %>
+<% end -%>
+<% if @callcounter != "" -%>
+callcounter = <%= @callcounter %>
+<% end -%>
+<% if @callerid != "" -%>
+callerid = <%= @callerid %>
+<% end -%>
+<% if @callgroup != "" -%>
+callgroup = <%= @callgroup %>
+<% end -%>
+<% if @callingpres != "" -%>
+callingpres = <%= @callingpres %>
+<% end -%>
+<% if @canreinvite != "" -%>
+canreinvite = <%= @canreinvite %>
+<% end -%>
+<% if @contactdeny != "" -%>
+contactdeny = <%= @contactdeny %>
+<% end -%>
+<% if @contactpermit != "" -%>
+contactpermit = <%= @contactpermit %>
+<% end -%>
+<% if @context != "" -%>
+context = <%= @context %>
+<% end -%>
+<% if @defaultip != "" -%>
+defaultip = <%= @defaultip %>
+<% end -%>
+<% if @defaultuser != "" -%>
+defaultuser = <%= @defaultuser %>
+<% end -%>
+<% Array(@deny).each do |d| -%>
+deny = <%= d %>
+<% end -%>
+<% if @directmedia != "" -%>
+directmedia = <%= @directmedia %>
+<% end -%>
+<% if @directmediadeny != "" -%>
+directmediadeny = <%= @directmediadeny %>
+<% end -%>
+<% if @directmediapermit != "" -%>
+directmediapermit = <%= @directmediapermit %>
+<% end -%>
+<% Array(@disallow).each do |a| -%>
+disallow = <%= a %>
+<% end -%>
+<% if @dtmfmode != "" -%>
+dtmfmode = <%= @dtmfmode %>
+<% end -%>
+<% if @encryption != "" -%>
+encryption = <%= @encryption %>
+<% end -%>
+<% if @fromdomain != "" -%>
+fromdomain = <%= @fromdomain %>
+<% end -%>
+<% if @fromuser != "" -%>
+fromuser = <%= @fromuser %>
+<% end -%>
+<% if @host != "" -%>
+host = <%= @host %>
+<% end -%>
+<% if @ignoresdpversion != "" -%>
+ignoresdpversion = <%= @ignoresdpversion %>
+<% end -%>
+<% if @insecure != "" -%>
+insecure = <%= @insecure %>
+<% end -%>
+<% if @language != "" -%>
+language = <%= @language %>
+<% end -%>
+<% if @mailbox != "" -%>
+mailbox = <%= @mailbox %>
+<% end -%>
+<% if @maxcallbitrate != "" -%>
+maxcallbitrate = <%= @maxcallbitrate %>
+<% end -%>
+<% if @maxforwards != "" -%>
+maxforwards = <%= @maxforwards %>
+<% end -%>
+<% if @md5secret != "" -%>
+md5secret = <%= @md5secret %>
+<% end -%>
+<% if @nat != "" -%>
+nat = <%= @nat %>
+<% end -%>
+<% if @outboundproxy != "" -%>
+outboundproxy = <%= @outboundproxy %>
+<% end -%>
+<% if @pickupgroup != "" -%>
+pickupgroup = <%= @pickupgroup %>
+<% end -%>
+<% Array(@permit).each do |p| -%>
+permit = <%= p %>
+<% end -%>
+<% if @pickupgroup != "" -%>
+pickupgroup = <%= @pickupgroup %>
+<% end -%>
+<% if @port != "" -%>
+port = <%= @port %>
+<% end -%>
+<% if @progressinband != "" -%>
+progressinband = <%= @progressinband %>
+<% end -%>
+<% if @promiscredir != "" -%>
+promiscredir = <%= @promiscredir %>
+<% end -%>
+<% if @qualify != "" -%>
+qualify = <%= @qualify %>
+<% end -%>
+<% if @qualifyfreq != "" -%>
+qualifyfreq = <%= @qualifyfreq %>
+<% end -%>
+<% if @regexten != "" -%>
+regexten = <%= @regexten %>
+<% end -%>
+<% if @registertrying != "" -%>
+registertrying = <%= @registertrying %>
+<% end -%>
+<% if @remotesecret != "" -%>
+remotesecret = <%= @remotesecret %>
+<% end -%>
+<% if @rfc2833compensate != "" -%>
+rfc2833compensate = <%= @rfc2833compensate %>
+<% end -%>
+<% if @rtpholdtimeout != "" -%>
+rtpholdtimeout = <%= @rtpholdtimeout %>
+<% end -%>
+<% if @secret != "" -%>
+secret = <%= @secret %>
+<% end -%>
+<% if @sendrpid != "" -%>
+sendrpid = <%= @sendrpid %>
+<% end -%>
+<% if @session_expires != "" -%>
+session-expires = <%= @session_expires %>
+<% end -%>
+<% if @session_minse != "" -%>
+session-minse = <%= @session_minse %>
+<% end -%>
+<% if @session_refresher != "" -%>
+session-refresher = <%= @session_refresher %>
+<% end -%>
+<% if @session_timers != "" -%>
+session-timers = <%= @session_timers %>
+<% end -%>
+<% if @setvar != "" -%>
+setvar = <%= @setvar %>
+<% end -%>
+<% if @subscribecontext != "" -%>
+subscribecontext = <%= @subscribecontext %>
+<% end -%>
+<% if @t38pt_usertpsource != "" -%>
+t38pt-usertpsource = <%= @t38pt_usertpsource %>
+<% end -%>
+<% if @template != "" -%>
+template = <%= @template %>
+<% end -%>
+<% if @timerb != "" -%>
+timerb = <%= @timerb %>
+<% end -%>
+<% if @timert1 != "" -%>
+timert1 = <%= @timert1 %>
+<% end -%>
+<% if @transport != "" -%>
+transport = <%= @transport %>
+<% end -%>
+<% if @trustrpid != "" -%>
+trustrpid = <%= @trustrpid %>
+<% end -%>
+<% if @unsolicited_mailbox != "" -%>
+unsolicited-mailbox = <%= @unsolicited_mailbox %>
+<% end -%>
+<% if @use_q850_reason != "" -%>
+use-q850-reason = <%= @use_q850_reason %>
+<% end -%>
+<% if @useclientcode != "" -%>
+useclientcode = <%= @useclientcode %>
+<% end -%>
+<% if @username != "" -%>
+username = <%= @username %>
+<% end -%>
+<% if @videosupport != "" -%>
+videosupport = <%= @videosupport %>
+<% end -%>
