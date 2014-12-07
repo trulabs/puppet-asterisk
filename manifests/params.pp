@@ -77,7 +77,7 @@ class asterisk::params {
     'OpenBSD': {
       $asteriskuser = '_asterisk'
       $asteriskgroup = '_asterisk'
-      $astbinary = '/usr/sbin/asterisk'
+      $astbinary = '/usr/local/sbin/asterisk'
       $astetcdir = '/etc/asterisk'
       $astmoddir = '/usr/local/lib/asterisk/modules'
       $astvarlibdir = '/usr/local/share/asterisk'
