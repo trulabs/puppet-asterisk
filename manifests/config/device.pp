@@ -145,6 +145,6 @@ define asterisk::config::device (
   concat::fragment{"sip_device_${device_name}":
     target  => $target,
     content => template('asterisk/device.erb'),
-    order   => 50,
+    order   => '50',
   }
 }

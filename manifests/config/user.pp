@@ -89,6 +89,6 @@ define asterisk::config::user (
   concat::fragment{$safe_title:
     target  => $target,
     content => template('asterisk/user.erb'),
-    order   => 20
+    order   => '20'
   }
 }
