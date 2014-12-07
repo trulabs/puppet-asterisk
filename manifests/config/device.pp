@@ -25,8 +25,8 @@
 #  manuals for sip devices.
 #
 define asterisk::config::device (
-  $device_name = $title,
   $target,
+  $device_name = $title,
   $type = 'friend',
   $accountcode = '',
   $allow = [],

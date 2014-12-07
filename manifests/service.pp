@@ -27,9 +27,9 @@ class asterisk::service (
       enable     => $service_enable,
       hasstatus  => true,
       hasrestart => true,
-      restart    => '/etc/init.d/asterisk restart',
-      start      => '/etc/init.d/asterisk start',
-      stop       => '/etc/init.d/asterisk stop',
+#      restart    => '/etc/init.d/asterisk restart',
+#      start      => '/etc/init.d/asterisk start',
+#      stop       => '/etc/init.d/asterisk stop',
     }
   }
 }

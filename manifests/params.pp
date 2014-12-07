@@ -42,7 +42,10 @@ class asterisk::params {
 
   case $::osfamily {
     'Debian': {
+      $asteriskuser = 'asterisk'
+      $asteriskgroup = 'asterisk'
       $astetcdir = '/etc/asterisk'
+      $astbinary = '/usr/sbin/asterisk'
       $astmoddir = '/usr/lib/asterisk/modules'
       $astvarlibdir = '/var/lib/asterisk'
       $astdbdir ='/var/lib/asterisk'
@@ -54,6 +57,9 @@ class asterisk::params {
       $astlogdir = '/var/log/asterisk'
     }
     'RedHat': {
+      $asteriskuser = 'asterisk'
+      $asteriskgroup = 'asterisk'
+      $astbinary = '/usr/sbin/asterisk'
       $astetcdir = '/etc/asterisk'
       $astmoddir = $::architecture ? {
         /64/ => '/usr/lib64/asterisk/modules',
@@ -64,6 +70,21 @@ class asterisk::params {
       $astkeydir = '/var/lib/asterisk'
       $astdatadir = '/var/lib/asterisk'
       $astagidir = '/var/lib/asterisk/agi-bin'
+      $astspooldir = '/var/spool/asterisk'
+      $astrundir = '/var/run/asterisk'
+      $astlogdir = '/var/log/asterisk'
+    }
+    'OpenBSD': {
+      $asteriskuser = '_asterisk'
+      $asteriskgroup = '_asterisk'
+      $astbinary = '/usr/sbin/asterisk'
+      $astetcdir = '/etc/asterisk'
+      $astmoddir = '/usr/local/lib/asterisk/modules'
+      $astvarlibdir = '/usr/local/share/asterisk'
+      $astkeydir = '/etc/asterisk'
+      $astdbdir = '/var/db/asterisk'
+      $astdatadir = '/usr/local/share/asterisk'
+      $astagidir = '/usr/local/share/asterisk/agi-bin'
       $astspooldir = '/var/spool/asterisk'
       $astrundir = '/var/run/asterisk'
       $astlogdir = '/var/log/asterisk'

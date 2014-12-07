@@ -52,6 +52,14 @@
 #   Boolean. Whether Puppet should manage the configuration files.
 #   Default: true
 #
+# [*asteriskuser*]
+#   String. The user that runs the asterisk service.
+#   Default: OS specific
+#
+# [*asteriskgroup*]
+#   String. The group that runs the asterisk service.
+#   Default: OS specific
+#
 # [*ari_enabled*]
 #   String. Enable the ARI interface in Asterisk.
 #   Options: 'yes', 'no'
@@ -60,6 +68,10 @@
 # [*ast_dumpcore*]
 #   String. Whether Asterisk should create core dumps ('no' is false, anything else is true)
 #   Default: 'no'
+#
+# [*astbinary*]
+#   String. Pointing to the 'asterisk' binary.
+#   Default: OS specific
 #
 # [*astetcdir*]
 #   String. Directory configuration option in asterisk.conf
@@ -221,6 +233,8 @@
 #   Default: []
 #
 class asterisk(
+  $asteriskuser             = $asterisk::params::asteriskuser,
+  $asteriskgroup            = $asterisk::params::asteriskgroup,
   $service_enable           = $asterisk::params::service_enable,
   $service_ensure           = $asterisk::params::service_ensure,
   $service_manage           = $asterisk::params::service_manage,
@@ -229,6 +243,7 @@ class asterisk(
   $manage_config            = $asterisk::params::manage_config,
   $ari_enabled              = $asterisk::params::ari_enabled,
   $ast_dumpcore             = $asterisk::params::ast_dumpcore,
+  $astbinary                = $asterisk::params::astbinary,
   $astetcdir                = $asterisk::params::astetcdir,
   $astmoddir                = $asterisk::params::astmoddir,
   $astvarlibdir             = $asterisk::params::astvarlibdir,
@@ -280,13 +295,16 @@ class asterisk(
   validate_array($ext_includes, $ext_execs)
 
   class { '::asterisk::install':
-    package_ensure  => $package_ensure,
-    package_name    => $package_name,
+    package_ensure => $package_ensure,
+    package_name   => $package_name,
   } ->
   class { '::asterisk::config':
     manage_config       => $manage_config,
+    asteriskuser        => $asteriskuser,
+    asteriskgroup       => $asteriskgroup,
     ari_enabled         => $ari_enabled,
     ast_dumpcore        => $ast_dumpcore,
+    astbinary           => $astbinary,
     astetcdir           => $astetcdir,
     astmoddir           => $astmoddir,
     astvarlibdir        => $astvarlibdir,

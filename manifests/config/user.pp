@@ -67,15 +67,15 @@
 #     }
 #     # Add an ARI user
 #     asterisk::config::user{'/etc/asterisk/ari.conf':
-#         user   => hiera('asterisk::ari::user','ari_user),
+#         user   => hiera('asterisk::ari::user','ari_user'),
 #         secret => hiera('asterisk::ari::secret','ari_secret'),}
 #
 define asterisk::config::user (
-  $target      = $title,
   $user,
-  $secret      = "",
-  $read        = "",
-  $write       = "",
+  $target      = $title,
+  $secret      = '',
+  $read        = '',
+  $write       = '',
   $deny        = [],
   $permit      = [],
   $eventfilter = [],
