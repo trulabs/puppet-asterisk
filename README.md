@@ -180,6 +180,7 @@ This module has been built and tested with Puppet 2.7.
 The module has been tested on:
 * Debian 7 (Wheezy)
 * Ubuntu 14.04 (Trusty)
+* OpenBSD 5.6 -current with Puppet 3.7.3
 
 ##Tests
 
