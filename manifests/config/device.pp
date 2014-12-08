@@ -25,8 +25,8 @@
 #  manuals for sip devices.
 #
 define asterisk::config::device (
-  $device_name = $title,
   $target,
+  $device_name = $title,
   $type = 'friend',
   $accountcode = '',
   $allow = [],
@@ -145,6 +145,6 @@ define asterisk::config::device (
   concat::fragment{"sip_device_${device_name}":
     target  => $target,
     content => template('asterisk/device.erb'),
-    order   => 50,
+    order   => '50',
   }
 }

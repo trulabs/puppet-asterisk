@@ -13,8 +13,11 @@
 
 class asterisk::config (
   $manage_config,
+  $asteriskuser,
+  $asteriskgroup,
   $ari_enabled,
   $ast_dumpcore,
+  $astbinary,
   $astetcdir,
   $astmoddir,
   $astvarlibdir,
@@ -55,7 +58,7 @@ class asterisk::config (
 ) inherits asterisk {
   File {
     owner => 'root',
-    group => 'root',
+    group => '0',
     mode  => '0640',
   }
 
@@ -72,8 +75,8 @@ class asterisk::config (
 
     file { "${astetcdir}/asterisk.conf":
       ensure  => file,
-      owner   => 'asterisk',
-      group   => 'asterisk',
+      owner   => $asteriskuser,
+      group   => $asteriskgroup,
       path    => "${astetcdir}/asterisk.conf",
       content => template('asterisk/asterisk.conf.erb'),
       notify  => Service['asterisk'], # restart asterisk when asterisk.conf changes
@@ -81,8 +84,8 @@ class asterisk::config (
 
     file { "${astetcdir}/rtp.conf":
       ensure  => file,
-      owner   => 'asterisk',
-      group   => 'asterisk',
+      owner   => $asteriskuser,
+      group   => $asteriskgroup,
       path    => "${astetcdir}/rtp.conf",
       content => template('asterisk/rtp.conf.erb'),
       notify  => Service['asterisk'], # restart asterisk when rtp.conf changes
@@ -90,8 +93,8 @@ class asterisk::config (
 
     # Default settings for all config files created with concat
     Concat {
-      owner  => 'asterisk',
-      group  => 'asterisk',
+      owner  => $asteriskuser,
+      group  => $asteriskgroup,
       mode   => '0440',
       warn   => false,
       notify => Service['asterisk'],
@@ -104,17 +107,17 @@ class asterisk::config (
     concat::fragment { 'sip_general':
       target  => "${astetcdir}/sip.conf",
       content => template('asterisk/sip.conf.erb'),
-      order   => 10,
+      order   => '10',
     }
     concat::fragment { 'sip_authentication':
       target  => "${astetcdir}/sip.conf",
       content => template('asterisk/sip.conf.authentication.erb'),
-      order   => 20,
+      order   => '20',
     }
     concat::fragment { 'sip_devices':
       target  => "${astetcdir}/sip.conf",
       content => template('asterisk/sip.conf.devices.erb'),
-      order   => 40,
+      order   => '40',
     }
 
     # Manager/AMI configuration
@@ -122,7 +125,7 @@ class asterisk::config (
     concat::fragment { 'manager_header':
       target  => "${astetcdir}/manager.conf",
       content => template('asterisk/manager.conf.erb'),
-      order   => 1,
+      order   => '1',
     }
 
     # HTTP configuration
@@ -130,19 +133,19 @@ class asterisk::config (
     concat::fragment { 'http_header':
       target  => "${astetcdir}/http.conf",
       content => template('asterisk/http.conf.erb'),
-      order   => 1,
+      order   => '1',
     }
 
     # Validation step
     if ( $ari_enabled == 'yes' and $http_enabled == 'no') {
-      warning("ARI is enabled but HTTP is not. ARI will not be available.")
+      warning('ARI is enabled but HTTP is not. ARI will not be available.')
     }
     # ARI configuration
     concat{ "${astetcdir}/ari.conf": }
     concat::fragment { 'ari_header':
       target  => "${astetcdir}/ari.conf",
       content => template('asterisk/ari.conf.erb'),
-      order   => 1,
+      order   => '1',
     }
 
     # Extensions
@@ -150,7 +153,7 @@ class asterisk::config (
     concat::fragment {'extensions_general':
       target  => "${astetcdir}/extensions.conf",
       content => template('asterisk/extensions.conf.general.erb'),
-      order   => 5,
+      order   => '5',
     }
 
     # TODO /etc/init.d/asterisk
@@ -159,7 +162,7 @@ class asterisk::config (
 
   # Ask Asterisk to reload the SIP configuration
   exec { 'asterisk-sip-reload':
-    command     => '/usr/sbin/asterisk -rx "sip reload"',
+    command     => "${astbinary} -rx 'sip reload'",
     refreshonly => true,
   }
 }
