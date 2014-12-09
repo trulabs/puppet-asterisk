@@ -175,11 +175,9 @@ See LICENSE file.
 
 ##Limitations
 
-This module has been built and tested with Puppet 2.7.
-
 The module has been tested on:
-* Debian 7 (Wheezy)
-* Ubuntu 14.04 (Trusty)
+* Debian 7 (Wheezy) with Puppet 2.7 and 3.7
+* Ubuntu 14.04 (Trusty) with Puppet 3.4 and 3.7
 * OpenBSD 5.6 -current with Puppet 3.7.3
 
 ##Tests
