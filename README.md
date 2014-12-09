@@ -3,7 +3,7 @@ puppet-asterisk
 
 ## Description
 
-Puppet module for Asterisk
+Install and configure Asterisk (http://www.asterisk.org/)
 
 
 =======
