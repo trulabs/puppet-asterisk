@@ -688,7 +688,9 @@ tlsdontverifyserver=<%= @tlsdontverifyserver %>
 ;     This will pass incoming calls to the 's' extension
 ;
 ;
-;register => 2345:password@sip_proxy/1234
+<% if @register_sip != '' -%>
+register => <%= @register_sip %>
+<% end -%>
 ;
 ;    Register 2345 at sip provider 'sip_proxy'.  Calls from this provider
 ;    connect to local extension 1234 in extensions.conf, default context,

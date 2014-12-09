@@ -35,6 +35,7 @@ class asterisk::config (
   $manager_enabled,
   $manager_port,
   $manager_webenabled,
+  $register_sip,
   $rtpstart,
   $rtpend,
   $udpbindaddr,

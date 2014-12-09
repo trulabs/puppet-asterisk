@@ -144,6 +144,11 @@
 #   Options: 'yes', 'no'
 #   Default: 'no'
 #
+# [*register_sip*]
+#   String. When acting as SIP client to an upstream SIP provider or other asterisk, this is the 
+#   registration string.
+#   Default: ''
+#
 # [*rtpstart*]
 #   String. Lower limit for RTP port range
 #   Default: 10000
@@ -261,6 +266,7 @@ class asterisk(
   $manager_enabled          = $asterisk::params::manager_enabled,
   $manager_port             = $asterisk::params::manager_port,
   $manager_webenabled       = $asterisk::params::manager_webenabled,
+  $register_sip             = $asterisk::params::register_sip,
   $rtpstart                 = $asterisk::params::rtpstart,
   $rtpend                   = $asterisk::params::rtpend,
   $udpbindaddr              = $asterisk::params::udpbindaddr,
@@ -322,6 +328,7 @@ class asterisk(
     manager_enabled     => $manager_enabled,
     manager_port        => $manager_port,
     manager_webenabled  => $manager_webenabled,
+    register_sip	=> $register_sip,
     rtpstart            => $rtpstart,
     rtpend              => $rtpend,
     udpbindaddr         => $udpbindaddr,
