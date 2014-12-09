@@ -187,7 +187,7 @@ The module has been tested on:
 Run tests from the tests/ folder, e.g.:
     sudo puppet apply -v tests/init.pp --modulepath modules/:/etc/puppet/modules --show_diff --noop
 
-### Caveatt: puppetlabs/concat
+### Caveat: puppetlabs/concat
 In order to successfully run a `--noop` test with the
 `puppetlabs/concat` module, you must first run a successful concat
 test so the module can compile a local shell script. A simple test
