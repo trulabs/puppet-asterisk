@@ -120,6 +120,16 @@ class asterisk::config (
       order   => '40',
     }
 
+    # IAX configuration
+    concat {"${astetcdir}/iax.conf":
+      notify => Exec['asterisk-iax-reload'],
+    }
+    concat::fragment { 'iax_general':
+      target  => "${astetcdir}/iax.conf",
+      content => template('asterisk/iax.conf.erb'),
+      order   => '10',
+    }
+
     # Manager/AMI configuration
     concat { "${astetcdir}/manager.conf": }
     concat::fragment { 'manager_header':
@@ -163,6 +173,12 @@ class asterisk::config (
   # Ask Asterisk to reload the SIP configuration
   exec { 'asterisk-sip-reload':
     command     => "${astbinary} -rx 'sip reload'",
+    refreshonly => true,
+  }
+
+  # Ask Asterisk to reload the IAX configuration
+  exec { 'asterisk-iax-reload':
+    command     => "${astbinary} -rx 'reload chan_iax2.so'",
     refreshonly => true,
   }
 }

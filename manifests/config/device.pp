@@ -1,6 +1,6 @@
 # == Defined Type: asterisk::config::device
-#  Define SIP devices for use with Asterisk using concat::fragment on
-#  the sip.conf file.
+#  Define SIP and IAX devices for use with Asterisk using concat::fragment on
+#  the sip.conf, or iax.conf file.
 #
 # === Parameters
 #  [*device_name*]
@@ -22,7 +22,7 @@
 #
 # ==== String Parameters
 #  The remaining parameters are strings as described in the Asterisk
-#  manuals for sip devices.
+#  manuals for sip or iax devices.
 #
 define asterisk::config::device (
   $target,
@@ -97,6 +97,7 @@ define asterisk::config::device (
   $useclientcode = '',
   $username = '',
   $videosupport = '',
+  $requirecalltoken = '',
 )
 {
   validate_array ($allow, $disallow)
@@ -142,7 +143,7 @@ define asterisk::config::device (
     }
   }
 
-  concat::fragment{"sip_device_${device_name}":
+  concat::fragment{"device_${device_name}":
     target  => $target,
     content => template('asterisk/device.erb'),
     order   => '50',
