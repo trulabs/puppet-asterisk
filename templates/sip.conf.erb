@@ -688,7 +688,11 @@ tlsdontverifyserver=<%= @tlsdontverifyserver %>
 ;     This will pass incoming calls to the 's' extension
 ;
 ;
-<% if @register_sip != '' -%>
+<% if @register_sip.is_a? Array -%>
+<%- @register_sip.each do |reg| -%>
+register => <%= reg %>
+<%- end -%>
+<% elsif @register_sip != '' -%>
 register => <%= @register_sip %>
 <% end -%>
 ;
