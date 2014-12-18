@@ -16,5 +16,5 @@
   "source": "git://github.com/trulabs/puppet-asterisk",
   "summary": "A module to manage Asterisk deployments.",
   "tags": [],
-  "version": "0.0.5"
+  "version": "0.0.6"
 }
