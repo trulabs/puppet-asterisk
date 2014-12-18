@@ -12,9 +12,9 @@ node default {
 
   # Manage sip with includes
   concat::fragment{'sip_includes':
-    target => '/etc/asterisk/sip.conf',
+    target  => '/etc/asterisk/sip.conf',
     content => '#include sip.d/*.conf',
-    order => 50,
+    order   => 50,
   }
   $sip_d = '/etc/asterisk/sip.d'
   file{$sip_d:
