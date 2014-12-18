@@ -15,7 +15,10 @@ node default {
     secret            => 'sillypassword',
     host              => 'myfriend.domain.tld',
     port              => '64391',
-    permit            => ['192.168.1.0/255.255.255.0','172.17.3.0/255.255.254.0',] ,
+    permit            => [
+        '192.168.1.0/255.255.255.0',
+        '172.17.3.0/255.255.254.0',
+      ],
     deny              => ['0.0.0.0/255.255.255.255',],
     callbackextension => '12337ACB27',
     disallow          => ['all'],
