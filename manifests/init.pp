@@ -67,7 +67,7 @@
 #
 # [*ast_dumpcore*]
 #   String. Whether Asterisk should create core dumps
-#   ('no' is false, anything else is true)
+#     'no' is false, anything else is true.
 #   Default: 'no'
 #
 # [*astbinary*]
@@ -120,7 +120,7 @@
 #
 # [*http_enabled*]
 #   String. Enable the HTTP interface in Asterisk.
-#   Should be 'yes' if you also enable ARI.
+#     Should be 'yes' if you also enable ARI.
 #   Options: 'yes', 'no'
 #   Default: 'no'
 #
