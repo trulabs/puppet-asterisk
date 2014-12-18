@@ -113,6 +113,12 @@ TCP Port for the Asterisk Manager Interface (AMI) ('5038').
 
 Web Enable the Asterisk Manager Interface (AMI) ('yes' or 'no').
 
+#####`register_sip`
+
+Registration information to upstream SIP devices or providers.
+Either a string, or array of multiple registration strings.
+Defaults as empty string ''.
+
 #####`rtpstart`
 
 Lower limit for RTP port range.
