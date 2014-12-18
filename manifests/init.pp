@@ -66,7 +66,8 @@
 #   Default: 'no'
 #
 # [*ast_dumpcore*]
-#   String. Whether Asterisk should create core dumps ('no' is false, anything else is true)
+#   String. Whether Asterisk should create core dumps
+#   ('no' is false, anything else is true)
 #   Default: 'no'
 #
 # [*astbinary*]
@@ -118,7 +119,8 @@
 #   Default: '0.0.0.0'
 #
 # [*http_enabled*]
-#   String. Enable the HTTP interface in Asterisk. Should be 'yes' if you also enable ARI.
+#   String. Enable the HTTP interface in Asterisk.
+#   Should be 'yes' if you also enable ARI.
 #   Options: 'yes', 'no'
 #   Default: 'no'
 #
@@ -145,8 +147,8 @@
 #   Default: 'no'
 #
 # [*register_sip*]
-#   String. When acting as SIP client to an upstream SIP provider or other asterisk, this is the 
-#   registration string.
+#   String. When acting as SIP client to an upstream SIP provider or other
+#     asterisk, this is the registration string.
 #   Default: ''
 #
 # [*rtpstart*]
@@ -194,7 +196,8 @@
 #   Default: ''
 #
 # [*tlsdontverifyserver*]
-#   String. When acting as TLS client, whether asterisk should verify the server certificate 'yes' or 'no'
+#   String. When acting as TLS client, whether asterisk should
+#     verify the server certificate 'yes' or 'no'
 #   Default: 'no'
 #
 # ==== extension.conf Options
@@ -203,17 +206,20 @@
 #     extensions.conf file when extensions are modified.
 #   Default: 'yes'
 #
-#   CAUTION: Changing to 'no' may have unpredictable results when configuring with Puppet.
+#   CAUTION: Changing to 'no' may have unpredictable results when
+#     configuring with Puppet.
 #
 # [*ext_writeprotect*]
 #   String. If static=yes and writeprotect=no, you can save dialplan
 #     by CLI command "dialplan save" in the extensions.conf file.
 #   Default: 'yes'
 #
-#   CAUTION: Changing to 'no' may have unpredictable results when configuring with Puppet.
+#   CAUTION: Changing to 'no' may have unpredictable results when
+#     configuring with Puppet.
 #
 # [*ext_autofallthrough*]
-#   String. If an extention runs out of things to do, wait 'yes' or terminate 'no'
+#   String. If an extention runs out of things to do,
+#     wait 'yes' or terminate 'no'
 #   Default: 'yes' (strongly recommended)
 #
 # [*ext_patternmatchnew*]
@@ -291,7 +297,8 @@ class asterisk(
 
   validate_string($package_ensure, $package_name)
   validate_bool($service_enable, $service_manage, $manage_config)
-  validate_string($manager_enabled, $manager_webenabled, $manager_bindaddr, $manager_port)
+  validate_string($manager_enabled, $manager_webenabled)
+  validate_string($manager_bindaddr, $manager_port)
   validate_string($ari_enabled, $http_enabled, $http_bindaddr, $http_port)
   validate_string($udpbindaddr, $tcpenable, $tcpbindaddr)
   validate_string($tlsenable, $tlsbindaddr, $tlscertfile)
@@ -328,7 +335,7 @@ class asterisk(
     manager_enabled     => $manager_enabled,
     manager_port        => $manager_port,
     manager_webenabled  => $manager_webenabled,
-    register_sip	=> $register_sip,
+    register_sip        => $register_sip,
     rtpstart            => $rtpstart,
     rtpend              => $rtpend,
     udpbindaddr         => $udpbindaddr,
