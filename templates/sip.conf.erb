@@ -851,7 +851,7 @@ register => <%= @register_sip %>
 ; subscribe_network_change_event = yes ; on by default
 
 <%- @localnet_sip.each do |net| -%>
-localnet => <%= net %>
+localnet = <%= net %>
 <%- end -%>
 <%- if @externip_sip!='' -%>
 externip = <%= @externip_sip %>
