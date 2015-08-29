@@ -169,7 +169,7 @@ class asterisk::config (
 
     # Voicemail configuration
     concat {"${astetcdir}/voicemail.conf":
-      notify => Exec['asterisk-sip-reload'],
+      notify => Exec['asterisk-voicemail-reload'],
     }
     concat::fragment { 'voicemail_general':
       target  => "${astetcdir}/voicemail.conf",
@@ -190,6 +190,12 @@ class asterisk::config (
   # Ask Asterisk to reload the IAX configuration
   exec { 'asterisk-iax-reload':
     command     => "${astbinary} -rx 'reload chan_iax2.so'",
+    refreshonly => true,
+  }
+
+  # Ask Asterisk to reload the voicemail configuration
+  exec { 'asterisk-iax-reload':
+    command     => "${astbinary} -rx 'voicemail reload'",
     refreshonly => true,
   }
 }
