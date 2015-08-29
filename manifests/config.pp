@@ -167,6 +167,16 @@ class asterisk::config (
       order   => '5',
     }
 
+    # Voicemail configuration
+    concat {"${astetcdir}/voicemail.conf":
+      notify => Exec['asterisk-sip-reload'],
+    }
+    concat::fragment { 'voicemail_general':
+      target  => "${astetcdir}/voicemail.conf",
+      content => template('asterisk/voicemail.conf.erb'),
+      order   => '10',
+    }
+
     # TODO /etc/init.d/asterisk
     # TODO /etc/logrotate.d/asterisk
   }
