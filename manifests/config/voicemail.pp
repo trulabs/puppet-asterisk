@@ -25,7 +25,6 @@
 #  manuals for sip or iax devices.
 #
 define asterisk::config::device (
-<%= id %> => <%= password %>,<%= name %>,<%= mail %>,<%= pager %>,<%= options %>
   $target,
   $id = $title,
   $password = '',
