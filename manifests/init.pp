@@ -242,6 +242,8 @@
 # [*ext_execs*]
 #   Array of Strings. Execute a program(s) or script that produces config files
 #   Default: []
+#
+# ==== queues.conf Options
 # [*queues_includes*]
 #   Array of Strings. Specify paths of files to `#include` in the
 #     queues.conf file.
