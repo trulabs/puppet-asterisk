@@ -1,30 +1,21 @@
-# == Defined Type: asterisk::config::device
-#  Define SIP and IAX devices for use with Asterisk using concat::fragment on
-#  the sip.conf, or iax.conf file.
+# == Defined Type: asterisk::config::voicemail
+#  Define voicemails for use with Asterisk using concat::fragment on
+#  the vaoicemail.conf file.
 #
 # === Parameters
-#  [*device_name*]
-#    String. Name of the device.
+#  [*id*]
+#    String. Voicemail id
 #    REQUIRED. No Default.
 #
 #  [*target*]
-#    String. Path to sip.conf.
+#    String. Path to voicemail.conf.
 #    REQUIRED. No Default.
-#
-#  [*type*]
-#    String. Values: 'friend', 'peer', or 'user'
-#    Default: 'friend'
-#
-# ==== Array Parameters
-#  [*allow*, *disallow*, *deny*, *permit*]
-#    Array of Strings. IPs or hostnames to control access.
-#    Default: []
 #
 # ==== String Parameters
 #  The remaining parameters are strings as described in the Asterisk
-#  manuals for sip or iax devices.
+#  manuals for voicemails.
 #
-define asterisk::config::device (
+define asterisk::config::voicemail (
   $target,
   $id = $title,
   $password = '',
