@@ -19,7 +19,7 @@ define asterisk::config::voicemail (
   $target,
   $id = $title,
   $password = '',
-  $name = '',
+  $username = '',
   $mail = '',
   $pager = '',
   $options = '',
