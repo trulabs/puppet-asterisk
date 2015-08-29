@@ -104,4 +104,7 @@ class asterisk::params {
   $ext_userscontext = 'default'
   $ext_includes = []
   $ext_execs = []
+
+  # Queues configuration
+  $queues_includes = []
 }

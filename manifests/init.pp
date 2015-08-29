@@ -242,6 +242,11 @@
 # [*ext_execs*]
 #   Array of Strings. Execute a program(s) or script that produces config files
 #   Default: []
+# [*queues_includes*]
+#   Array of Strings. Specify paths of files to `#include` in the
+#     queues.conf file.
+#   Default: []
+#
 #
 class asterisk(
   $asteriskuser             = $asterisk::params::asteriskuser,
@@ -293,6 +298,7 @@ class asterisk(
   $ext_userscontext         = $asterisk::params::ext_userscontext,
   $ext_includes             = $asterisk::params::ext_includes,
   $ext_execs                = $asterisk::params::ext_execs,
+  $queues_includes          = $asterisk::params::queues_includes,
 ) inherits asterisk::params {
 
   validate_string($package_ensure, $package_name)
@@ -306,6 +312,7 @@ class asterisk(
   validate_string($ext_writeprotect, $ext_autofallthrough, $ext_patternmatchnew)
   validate_string($ext_static, $ext_clearglobalvars, $ext_userscontext)
   validate_array($ext_includes, $ext_execs)
+  validate_array($queues_includes)
 
   class { '::asterisk::install':
     package_ensure => $package_ensure,
@@ -356,6 +363,7 @@ class asterisk(
     ext_userscontext    => $ext_userscontext,
     ext_includes        => $ext_includes,
     ext_execs           => $ext_execs,
+    queues_includes     => $queues_includes,
   }  ->
   class { '::asterisk::service':
     service_ensure => $service_ensure,
