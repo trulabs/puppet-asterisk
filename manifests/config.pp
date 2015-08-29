@@ -194,7 +194,7 @@ class asterisk::config (
   }
 
   # Ask Asterisk to reload the voicemail configuration
-  exec { 'asterisk-iax-reload':
+  exec { 'asterisk-voicemail-reload':
     command     => "${astbinary} -rx 'voicemail reload'",
     refreshonly => true,
   }
