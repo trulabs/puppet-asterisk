@@ -151,6 +151,19 @@
 #     asterisk, this is the registration string.
 #   Default: ''
 #
+# [*localnet_sip*]
+#   Array of Strings. Specify networks inside the NAT
+#   Default: []
+#
+# [*externip_sip*]
+#   String. When acting behind a NAT, use this parameter to specify the public
+#     address
+#   Default: ''
+#
+# [*domain_sip*]
+#   String. list of allowed domains
+#   Default: ''
+#
 # [*rtpstart*]
 #   String. Lower limit for RTP port range
 #   Default: 10000
@@ -273,6 +286,9 @@ class asterisk(
   $manager_port             = $asterisk::params::manager_port,
   $manager_webenabled       = $asterisk::params::manager_webenabled,
   $register_sip             = $asterisk::params::register_sip,
+  $localnet_sip             = $asterisk::params::localnet_sip,
+  $externip_sip             = $asterisk::params::externip_sip,
+  $domain_sip               = $asterisk::params::domain_sip,
   $rtpstart                 = $asterisk::params::rtpstart,
   $rtpend                   = $asterisk::params::rtpend,
   $udpbindaddr              = $asterisk::params::udpbindaddr,
@@ -306,6 +322,7 @@ class asterisk(
   validate_string($ext_writeprotect, $ext_autofallthrough, $ext_patternmatchnew)
   validate_string($ext_static, $ext_clearglobalvars, $ext_userscontext)
   validate_array($ext_includes, $ext_execs)
+  validate_array($localnet_sip)
 
   class { '::asterisk::install':
     package_ensure => $package_ensure,
@@ -356,6 +373,9 @@ class asterisk(
     ext_userscontext    => $ext_userscontext,
     ext_includes        => $ext_includes,
     ext_execs           => $ext_execs,
+    localnet_sip        => $localnet_sip,
+    externip_sip        => $externip_sip,
+    domain_sip          => $domain_sip,
   }  ->
   class { '::asterisk::service':
     service_ensure => $service_ensure,

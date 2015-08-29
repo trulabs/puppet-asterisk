@@ -104,4 +104,9 @@ class asterisk::params {
   $ext_userscontext = 'default'
   $ext_includes = []
   $ext_execs = []
+
+  # SIP networking configuration
+  localnet_sip = []
+  externip_sip = ''
+  domain_sip = ''
 }

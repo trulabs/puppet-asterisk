@@ -850,6 +850,13 @@ register => <%= @register_sip %>
 ;
 ; subscribe_network_change_event = yes ; on by default
 
+<%- @localnet_sip.each do |net| -%>
+localnet => <%= net %>
+<%- end -%>
+<%- if @externip_sip!='' -%>
+externip = <%= @externip_sip %>
+<%- end -%>
+
 ;----------------------------------- MEDIA HANDLING --------------------------------
 ; By default, Asterisk tries to re-invite media streams to an optimal path. If there's
 ; no reason for Asterisk to stay in the media path, the media will be redirected.
@@ -977,6 +984,9 @@ register => <%= @register_sip %>
 ; To disallow requests for domains not serviced by this server:
 ; allowexternaldomains=no
 
+<%- if @domain_sip!='' -%>
+domain = <%= @domain_sip %>
+<%- end -%>
 ;domain=mydomain.tld,mydomain-incoming
                                 ; Add domain and configure incoming context
                                 ; for external calls to this domain
