@@ -56,6 +56,7 @@ class asterisk::config (
   $ext_userscontext,
   $ext_includes,
   $ext_execs,
+  $queues_includes,
 ) inherits asterisk {
   File {
     owner => 'root',
@@ -90,6 +91,15 @@ class asterisk::config (
       path    => "${astetcdir}/rtp.conf",
       content => template('asterisk/rtp.conf.erb'),
       notify  => Service['asterisk'], # restart asterisk when rtp.conf changes
+    }
+
+    file { "${astetcdir}/queues.conf":
+      ensure  => file,
+      owner   => $asteriskuser,
+      group   => $asteriskgroup,
+      path    => "${astetcdir}/queues.conf",
+      content => template('asterisk/queues.conf.erb'),
+      notify  => Service['asterisk'], # restart asterisk when asterisk.conf changes
     }
 
     # Default settings for all config files created with concat
