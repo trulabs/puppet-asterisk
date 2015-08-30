@@ -167,6 +167,16 @@ class asterisk::config (
       order   => '5',
     }
 
+    # Voicemail configuration
+    concat {"${astetcdir}/voicemail.conf":
+      notify => Exec['asterisk-voicemail-reload'],
+    }
+    concat::fragment { 'voicemail_general':
+      target  => "${astetcdir}/voicemail.conf",
+      content => template('asterisk/voicemail.conf.erb'),
+      order   => '10',
+    }
+
     # TODO /etc/init.d/asterisk
     # TODO /etc/logrotate.d/asterisk
   }
@@ -180,6 +190,12 @@ class asterisk::config (
   # Ask Asterisk to reload the IAX configuration
   exec { 'asterisk-iax-reload':
     command     => "${astbinary} -rx 'reload chan_iax2.so'",
+    refreshonly => true,
+  }
+
+  # Ask Asterisk to reload the voicemail configuration
+  exec { 'asterisk-voicemail-reload':
+    command     => "${astbinary} -rx 'voicemail reload'",
     refreshonly => true,
   }
 }

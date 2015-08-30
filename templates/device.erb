@@ -3,6 +3,9 @@ type = <%= @type %>
 <% if @accountcode != "" -%>
 accountcode = <%= @accountcode %>
 <% end -%>
+<% Array(@disallow).each do |a| -%>
+disallow = <%= a %>
+<% end -%>
 <% Array(@allow).each do |a| -%>
 allow = <%= a %>
 <% end -%>
@@ -65,9 +68,6 @@ directmediadeny = <%= @directmediadeny %>
 <% end -%>
 <% if @directmediapermit != "" -%>
 directmediapermit = <%= @directmediapermit %>
-<% end -%>
-<% Array(@disallow).each do |a| -%>
-disallow = <%= a %>
 <% end -%>
 <% if @dtmfmode != "" -%>
 dtmfmode = <%= @dtmfmode %>
