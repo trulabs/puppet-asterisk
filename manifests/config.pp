@@ -56,6 +56,9 @@ class asterisk::config (
   $ext_userscontext,
   $ext_includes,
   $ext_execs,
+  $localnet_sip,
+  $externip_sip,
+  $domain_sip,
 ) inherits asterisk {
   File {
     owner => 'root',
